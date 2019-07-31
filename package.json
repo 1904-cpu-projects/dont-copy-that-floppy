@@ -1,0 +1,49 @@
+{
+  "name": "team-bnrb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run webpack", 
+    "webpack": "webpack",
+    "webpack:dev": "npm run webpack -- --watch --mode=development",
+    "start:dev": "npm run webpack:dev & nodemon server.js --ignore dist --ignore src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1904-cpu-projects/team-bnrb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1904-cpu-projects/team-bnrb/issues"
+  },
+  "homepage": "https://github.com/1904-cpu-projects/team-bnrb#readme",
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": 10
+          }
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  }
+}
