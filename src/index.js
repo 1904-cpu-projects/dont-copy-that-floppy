@@ -1,11 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App';
 
-class App extends React.Component {
-  render () {
-    return (
-      <div>Hello World!</div>
-    )
-  }
-}
 render(<App />, document.querySelector('#root'));
