@@ -8,6 +8,7 @@ const distPath = path.join(__dirname, '../dist');
 app.use(express.static(distPath));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/categories', require('./routes/categories'));
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../index.html'));
@@ -15,4 +16,4 @@ app.get('/', (req, res, next) => {
 
 app.listen(port, () => console.log(`listening on PORT ${port}`));
 
-module.exports = app
+module.exports = app;
