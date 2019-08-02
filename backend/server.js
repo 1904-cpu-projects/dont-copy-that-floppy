@@ -10,7 +10,7 @@ app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
 
 app.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.listen(port, () => console.log(`listening on PORT ${port}`));
