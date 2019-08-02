@@ -7,7 +7,7 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
-    "start:dev": "npm run webpack:dev & nodemon server.js --ignore dist --ignore src",
+    "start:dev": "npm run webpack:dev & nodemon ./backend/server.js --ignore dist --ignore src",
     "seed": "node ./backend/seed.js"
   },
   "repository": {
