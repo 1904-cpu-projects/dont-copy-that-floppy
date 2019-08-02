@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 
-const Header = (products) => {
+const Header = ({ products }) => {
   //console.log(products);
   return (
     <div>
