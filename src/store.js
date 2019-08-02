@@ -7,7 +7,7 @@ const SET_PRODUCTS = 'SET_PRODUCTS';
 const productsReducer = (state = [], action)=>{
   switch(action.type){
     case SET_PRODUCTS:
-      return action.products
+      return [...state, action.products];
   }
 
   return state;
@@ -15,7 +15,7 @@ const productsReducer = (state = [], action)=>{
 }
 
 const reducer = combineReducers({
-  products: products
+  products: productsReducer
 });
 
 const _setProducts = (products)=>{
@@ -28,7 +28,8 @@ const _setProducts = (products)=>{
 const setProducts = ()=>{
   return async (dispatch)=>{
     const response = await axios.get('/api/products');
-    dispatch(_setProducts(response.data));
+    console.log(response.data);
+    return dispatch(_setProducts(response.data));
   }
 }
 

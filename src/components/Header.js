@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 const Header = (products) => {
-  console.log(products);
+  //console.log(products);
   return (
     <div>
       <Link to='/'>Home</Link>
