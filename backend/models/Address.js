@@ -86,7 +86,7 @@ const Address = db.define('addresses', {
     allowNull: false
   },
   zipCode: {
-    type: Sequelize.INTEGER(5).ZEROFILL.UNSIGNED,
+    type: Sequelize.INTEGER,
     allowNull: false
   }
 });
