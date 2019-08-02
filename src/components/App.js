@@ -1,10 +1,17 @@
 import React from 'react';
 import { HashRouter, Route, Link } from 'react-router-dom';
-import Header from './Header.js'
-import Home from './Home.js'
-import Products from './Products.js'
+import Header from './Header'
+import Home from './Home'
+import Products from './Products'
+import {store, setProducts} from '../store'
+import {connect} from 'react-redux'
 
 class App extends React.Component {
+
+  componentDidMount(){
+    this.props.loadProducts();
+  }
+
   render() {
     return (
       <HashRouter>
@@ -17,4 +24,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    loadProducts: ()=> dispatch(setProducts)
+  }
+}
+
+export default connect(mapDispatchToProps)(App);
