@@ -26,8 +26,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-    loadProducts: ()=> dispatch(setProducts)
+    loadProducts: ()=> dispatch(setProducts())
   }
 }
 
-export default connect(mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
