@@ -8,7 +8,7 @@ const SET_CATEGORIES = 'SET_CATEGORIES';
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
-      return [...state, action.products];
+      return [...state, action.products].flat();
   }
 
   return state;

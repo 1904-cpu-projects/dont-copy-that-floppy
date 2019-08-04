@@ -4,6 +4,8 @@ import Header from './Header';
 import Home from './Home';
 import Sidebar from './Sidebar';
 import Products from './Products';
+import Cart from './Cart';
+import Login from './Login';
 import { store, setProducts, setCategories } from '../store';
 import { connect } from 'react-redux';
 
@@ -21,6 +23,8 @@ class App extends React.Component {
         <Route path="/" component={Sidebar} />
         <Route exact path="/" component={Home} />
         <Route path="/products" component={Products} />
+        <Route path='/cart' component={Cart} />
+        <Route path='/login' component={Login} />
       </HashRouter>
     );
   }
