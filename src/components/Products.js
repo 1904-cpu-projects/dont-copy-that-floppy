@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import SingleProduct from './SingleProduct';
 
 const Products = ({ products }) => {
-  console.log(products);
   return (
     <div className="card-deck">
-      {products.map(product => {
-        console.log('product is ', product);
-        return <SingleProduct product={product} />;
-      })}
+      {products.map(product => (
+        <SingleProduct product={product} key={product.id} />
+      ))}
     </div>
   );
 };

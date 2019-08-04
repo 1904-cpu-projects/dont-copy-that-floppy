@@ -2,15 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ product }) => {
-  console.log(product);
   return (
     <div className="card">
       <img
         className="card-img-top"
         src={product.imageUrl}
         alt="product image"
-        height="50 px"
-        width="50 px"
+        style={{ width: 200, height: 200 }}
       />
       <div className="card-body">
         <h5 className="card-title">{product.name}</h5>
