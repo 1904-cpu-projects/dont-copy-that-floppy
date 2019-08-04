@@ -10,6 +10,7 @@ const Header = ({ products }) => {
       <Link to='/products'>Products ({products.length})</Link>
       <Link to='/cart'>Cart</Link>
       <Link to='/login'>Log In</Link>
+      <Link to='/signup'>Sign Up</Link>
     </div>
   )
 }
