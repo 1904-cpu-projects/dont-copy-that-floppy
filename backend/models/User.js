@@ -26,11 +26,7 @@ const User = db.define('users', {
   password: {
     type: Sequelize.STRING,
     allowNull: false,
-  },
-  order: {
-    type: Sequelize.JSON
   }
-
 });
 
 module.exports = User;

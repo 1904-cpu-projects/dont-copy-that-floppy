@@ -1,11 +1,15 @@
 import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { loginUser } from '../store'
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      error: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,31 +19,51 @@ class Login extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit (event) {
+  async handleSubmit (event) {
     event.preventDefault();
-    //leaving this as just a console log for now
-    console.log(this.state)
+    const response = await axios.post('/login', this.state)
+    if (response.status === 201) {
+      this.props.userLogin()
+      this.setState({error: ""})
+    } else if (response.status === 203) {
+      this.setState({error: response.data})
+    }
   }
 
   render() {
+    const { email, password, error } = this.state
+    const { handleChange, handleSubmit } = this
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <label>
-            Username
-            <input type='text' name='username' value={this.username} onChange={this.handleChange}/>
+            Email
+            <input type='text' name='email' value={email} onChange={handleChange}/>
           </label>
           <br />
           <label>
             Password
-            <input type='text' name='password' value={this.password} onChange={this.handleChange}/>
+            <input type='password' name='password' value={password} onChange={handleChange}/>
           </label>
           <br />
-          <button type='submit'>Log In</button>
+          <button type='submit'  >Log In</button>
         </form>
+        {error ? <h4>{error}</h4> : ""}
       </div>
     )
   }
 }
 
-export default Login
+const stateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser
+  }
+}
+
+const dispatchToProps = dispatch => {
+  return {
+    userLogin: () => dispatch(loginUser())
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Login)
