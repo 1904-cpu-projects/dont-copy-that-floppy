@@ -10,7 +10,7 @@ const seed = async () => {
     description: 'Blakes Product',
     quantity: 3
   });
-  await User.create({ name: 'John Doe' });
+  await User.create({ firstName: 'John', lastName: "Doe", email: "johnny@johnny.com", password: "password"  });
   await Category.create({ name: 'VCRs' });
   await Category.create({ name: 'Floppy Disks' });
 };
