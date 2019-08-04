@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Login extends React.Component {
   constructor() {
@@ -15,27 +16,32 @@ class Login extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit (event) {
+  async handleSubmit (event) {
     event.preventDefault();
-    //leaving this as just a console log for now
-    console.log(this.state)
+    const response = await axios.post('/login', this.state)
+    if (response.status === 201) {
+      
+    }
   }
 
   render() {
+    console.log(this.state)
+    const { username, password } = this.state
+    const { handleChange, handleSubmit } = this
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <label>
             Username
-            <input type='text' name='username' value={this.username} onChange={this.handleChange}/>
+            <input type='text' name='username' value={username} onChange={handleChange}/>
           </label>
           <br />
           <label>
             Password
-            <input type='text' name='password' value={this.password} onChange={this.handleChange}/>
+            <input type='text' name='password' value={password} onChange={handleChange}/>
           </label>
           <br />
-          <button type='submit'>Log In</button>
+          <button type='submit'  >Log In</button>
         </form>
       </div>
     )
