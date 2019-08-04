@@ -28,7 +28,7 @@ const categoriesReducer = (state = [], action) => {
   return state;
 };
 
-const loginReducer = (state = { email: "" }) => {
+const loginReducer = (state = { email: "" }, action) => {
   switch (action.type) {
     case LOGIN_USER:
       return {...state, email: action.email}

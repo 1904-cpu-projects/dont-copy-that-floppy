@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor() {
@@ -20,12 +21,11 @@ class Login extends React.Component {
     event.preventDefault();
     const response = await axios.post('/login', this.state)
     if (response.status === 201) {
-      
+
     }
   }
 
   render() {
-    console.log(this.state)
     const { username, password } = this.state
     const { handleChange, handleSubmit } = this
     return (
@@ -48,4 +48,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default connect()(Login)
