@@ -57,6 +57,7 @@ const _setCategories = categories => {
 };
 
 const _loginUser = email => {
+  console.log("Got here")
   return {
     type: LOGIN_USER,
     email

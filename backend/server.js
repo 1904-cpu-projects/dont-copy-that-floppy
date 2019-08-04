@@ -31,27 +31,36 @@ app.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 
+app.get('/login', async(req, res, next) => {
+  if(req.session.email) {
+    res.send(req.session.email)
+  } else {
+    res.sendStatus(400)
+  }
+})
+
 app.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   try {
     if (email && password) {
-      const loginUser = User.findOne({
+      const loginUser = await User.findOne({
         where: {
           email
         }
       })
       if(loginUser) {
         if (loginUser.password === password) {
+
           req.session.email = email
           res.status(201).send(req.session.email)
         } else {
-          res.status(401).send("Unauthorized: Wrong Persion")
+          res.status(203).send("Unauthorized: Wrong Password")
         }
       } else {
-        res.status(401).send('Unautorized: Please create an Account')
+        res.status(203).send('Unautorized: Please create an Account')
       }
     } else {
-      res.status(401).send("Unauthorized: Enter your Credentials")
+      res.status(203).send("Unauthorized: Enter your Credentials")
     }
   } catch (ex) {
     next(ex)

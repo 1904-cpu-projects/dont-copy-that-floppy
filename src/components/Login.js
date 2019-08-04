@@ -1,13 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { loginUser } from '../store'
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      username: '',
-      password: ''
+      email: '',
+      password: '',
+      error: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,31 +23,47 @@ class Login extends React.Component {
     event.preventDefault();
     const response = await axios.post('/login', this.state)
     if (response.status === 201) {
-
+      this.props.userLogin()
+      this.setState({error: ""})
+    } else if (response.status === 203) {
+      this.setState({error: response.data})
     }
   }
 
   render() {
-    const { username, password } = this.state
+    const { email, password, error } = this.state
     const { handleChange, handleSubmit } = this
     return (
       <div>
         <form onSubmit={handleSubmit}>
           <label>
-            Username
-            <input type='text' name='username' value={username} onChange={handleChange}/>
+            Email
+            <input type='text' name='email' value={email} onChange={handleChange}/>
           </label>
           <br />
           <label>
             Password
-            <input type='text' name='password' value={password} onChange={handleChange}/>
+            <input type='password' name='password' value={password} onChange={handleChange}/>
           </label>
           <br />
           <button type='submit'  >Log In</button>
         </form>
+        {error ? <h4>{error}</h4> : ""}
       </div>
     )
   }
 }
 
-export default connect()(Login)
+const stateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser
+  }
+}
+
+const dispatchToProps = dispatch => {
+  return {
+    userLogin: () => dispatch(loginUser())
+  }
+}
+
+export default connect(stateToProps, dispatchToProps)(Login)
