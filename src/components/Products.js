@@ -1,15 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import SingleProduct from './SingleProduct';
 
-const Products = () => {
+const Products = ({ products }) => {
   return (
-    <div>
-      <ul>
-        <li>Product 1</li>
-        <li>Product 2</li>
-        <li>Product 3</li>
-      </ul>
+    <div className="card-deck">
+      {products.map(product => (
+        <SingleProduct product={product} key={product.id} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Products
+const mapStateToProps = ({ products }) => {
+  return {
+    products
+  };
+};
+
+export default connect(mapStateToProps)(Products);

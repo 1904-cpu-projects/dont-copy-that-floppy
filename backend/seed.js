@@ -10,6 +10,13 @@ const seed = async () => {
     description: 'Blakes Product',
     quantity: 3
   });
+  await Product.create({
+    name: 'Product 2',
+    price: 3.5,
+    brand: 'Buddys',
+    description: 'Buddys Product',
+    quantity: 15
+  });
   await User.create({ name: 'John Doe' });
   await Category.create({ name: 'VCRs' });
   await Category.create({ name: 'Floppy Disks' });
