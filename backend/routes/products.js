@@ -14,8 +14,19 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id)
-    res.send(product)
+    const product = await Product.findByPk(req.params.id);
+    res.send(product);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+router.get('/category/:id', async (req, res, next) => {
+  try {
+    const products = await Product.findAll({
+      where: { categoryId: req.params.id }
+    });
+    res.send(products);
   } catch (ex) {
     next(ex);
   }
@@ -23,7 +34,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const newProduct = await Product.create(req.body);
     res.status(201).send(newProduct);
   } catch (ex) {
