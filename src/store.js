@@ -10,6 +10,7 @@ const SET_CATEGORIES = "SET_CATEGORIES";
 
 // Login Actions
 const LOGIN_USER = "LOGIN_USER";
+const LOGOUT_USER = "LOGOUT_USER";
 
 // User Actions
 const CREATE_USER = "CREATE_USER";
@@ -38,6 +39,9 @@ const loginReducer = (state = { email: "" }, action) => {
   switch (action.type) {
     case LOGIN_USER:
       return {...state, email: action.email}
+    case LOGOUT_USER:
+      state = {}
+      return state
   }
   return state
 };
@@ -83,10 +87,15 @@ const _setCategories = categories => {
 };
 
 const _loginUser = email => {
-  console.log("Got here")
   return {
     type: LOGIN_USER,
     email
+  }
+}
+
+const _logoutUser = ()=>{
+  return {
+    type: LOGOUT_USER
   }
 }
 
@@ -125,12 +134,19 @@ const loginUser = () => {
   }
 }
 
+const logoutUser = () => {
+  return async dispatch => {
+    await axios.delete('/login');
+    dispatch(_logoutUser());
+  }
+}
+
 const createUser = (user) => {
   return async dispatch => {
     try{
       const response = await axios.post("/api/users", user);
       dispatch(_createUser(response.data));
-      window.location.hash = '/';
+      window.location.hash = '/login';
     }
     catch(ex){
       dispatch(_catchError(ex.response.data));
@@ -141,4 +157,4 @@ const createUser = (user) => {
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { setProducts, setCategories, loginUser, createUser };
+export { setProducts, setCategories, loginUser, createUser, logoutUser };

@@ -1,26 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
+import { logoutUser } from '../store';
 
-const Header = ({ products, user }) => {
-  console.log(user);
+const Header = ({ products, user, loggedInUser, handleLogout }) => {
+  console.log(loggedInUser.email);
   return (
     <div>
       <Link to='/'>Home</Link>
       <Link to='/products'>Products ({products.length})</Link>
       <Link to='/cart'>Cart</Link>
-      <Link to='/login'>Log In</Link>
+      <Link to='/login'>{loggedInUser.email ? <button onClick = {()=>handleLogout()}>Logout {loggedInUser.email}</button>  : `Login` }</Link>
 
-      <Link to='/signup'>{(!user.email) ? "Sign Up" : `Welcome ${user.firstName}`}</Link>
+      <Link to='/signup'>{(!loggedInUser.email) ? "Sign Up" : ""}</Link>
     </div>
   )
 }
 
-const mapStateToProps = ({products, user})=>{
+const mapStateToProps = ({products, user, loggedInUser})=>{
   return {
     products,
     user,
+    loggedInUser,
   }
 }
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    handleLogout: function(ev){
+      event.preventDefault();
+
+      dispatch(logoutUser());
+    }
+  }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
