@@ -66,6 +66,20 @@ app.post('/login', async (req, res, next) => {
   }
 });
 
+app.delete('/login', async (req, res, next) => {
+  try{
+    if(req.session.email){
+      delete req.session.email;
+      res.sendStatus(204);
+    }else{
+      console.log("this should never appear, check code in app.delete route");
+    }
+  }
+  catch (ex) {
+    next(ex)
+  }
+})
+
 app.listen(port, () => console.log(`listening on PORT ${port}`));
 
 module.exports = app;
