@@ -23,11 +23,11 @@ class App extends React.Component {
         <Route path="/" component={Header} />
         <Route path="/" component={Sidebar} />
         <Route exact path="/" component={Home} />
-        <Route path="/products" component={Products} />
+        <Route path="/products/category/:id" component={Products} />
+        <Route path="/products" exact component={Products} />
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="products/category/:id" component={Products} />
       </HashRouter>
     );
   }
