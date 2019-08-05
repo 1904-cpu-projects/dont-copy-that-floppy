@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ product }) => {
   return (
-    <div className="card">
+    <div
+      className="card"
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '250px',
+        margin: '1em'
+      }}
+    >
       <img
         className="card-img-top"
         src={product.imageUrl}

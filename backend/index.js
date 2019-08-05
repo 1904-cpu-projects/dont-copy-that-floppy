@@ -6,6 +6,7 @@ const Address = require('./models/Address');
 
 // User.belongsToMany(Address, { through: UserAddress });
 // Address.belongsToMany(User, { through: UserAddress });
+Product.belongsTo(Category);
 
 module.exports = {
   db,

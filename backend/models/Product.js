@@ -15,10 +15,7 @@ const Product = db.define('products', {
   imageUrl: {
     type: Sequelize.STRING,
     defaultValue:
-      'http://forge.prestashop.com/secure/attachment/52655/en-default-home_default.jpg',
-    validate: {
-      isUrl: true
-    }
+      'http://forge.prestashop.com/secure/attachment/52655/en-default-home_default.jpg'
   },
   price: {
     type: Sequelize.FLOAT,
