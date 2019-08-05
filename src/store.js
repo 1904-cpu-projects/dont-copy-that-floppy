@@ -11,6 +11,12 @@ const SET_CATEGORIES = "SET_CATEGORIES";
 // Login Actions
 const LOGIN_USER = "LOGIN_USER";
 
+// User Actions
+const CREATE_USER = "CREATE_USER";
+
+// Catch Errors
+const CATCH_ERROR = "CATCH_ERROR";
+
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
@@ -36,10 +42,30 @@ const loginReducer = (state = { email: "" }, action) => {
   return state
 };
 
+const userReducer = (state = {}, action)=>{
+  switch (action.type) {
+    case CREATE_USER:
+      return action.user
+  }
+
+  return state;
+}
+
+const errorReducer = (state = "", action)=>{
+  switch (action.type) {
+    case CATCH_ERROR:
+      return action.error
+  }
+
+  return state;
+}
+
 const reducer = combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
-  loggedInUser: loginReducer
+  loggedInUser: loginReducer,
+  user: userReducer,
+  error: errorReducer,
 });
 
 const _setProducts = products => {
@@ -64,6 +90,20 @@ const _loginUser = email => {
   }
 }
 
+const _createUser = (user)=>{
+  return {
+    type: CREATE_USER,
+    user
+  }
+}
+
+const _catchError = (error)=>{
+  return {
+    type: CATCH_ERROR,
+    error
+  }
+}
+
 const setProducts = () => {
   return async dispatch => {
     const response = await axios.get("/api/products");
@@ -85,7 +125,20 @@ const loginUser = () => {
   }
 }
 
+const createUser = (user) => {
+  return async dispatch => {
+    try{
+      const response = await axios.post("/api/users", user);
+      dispatch(_createUser(response.data));
+      window.location.hash = '/';
+    }
+    catch(ex){
+      dispatch(_catchError(ex.response.data));
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { setProducts, setCategories, loginUser };
+export { setProducts, setCategories, loginUser, createUser };

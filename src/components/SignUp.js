@@ -22,9 +22,10 @@ class SignUp extends React.Component{
   render(){
     const {firstName, lastName, email, password, passwordConfirm} = this.state;
     const {onChange} = this;
+    const {error} = this.props;
     return(
       <div>
-        <form onSubmit="{handleCreate}">
+        <form onSubmit={this.props.handleCreate}>
           <div>
             <label>First Name</label>
             <input type="text" name="firstName" required onChange={onChange}/>
@@ -47,28 +48,35 @@ class SignUp extends React.Component{
             {(password !== passwordConfirm) ? <div><font color="red">PASSWORDS DONT MATCH! 🤪</font></div>: ''}
           </div>
           <button disabled={(!firstName || !lastName || !email || !password || !passwordConfirm) ? true : false}>Create Account</button>
+          <div><font color="red">{(error === 'Account Already Exists') ? `${error} 🧐` : ''}</font></div>
         </form>
       </div>
     )
   }
 }
 
-// const mapDispatchToProps = ( dispatch )=>{
-//   return {
-//     handleCreate: function(ev){
-//       event.preventDefault();
+const mapStateToProps = ({error})=>{
+  return {
+    error,
+  }
+}
 
-//       dispatch(createUser({
-//         firstName: ev.target.firstName.value,
-//         lastName: ev.target.firstName.value,
-//         email: ev.target.email.value,
-//         password: ev.target.password.value
+const mapDispatchToProps = ( dispatch )=>{
+  return {
+    handleCreate: function(ev){
+      event.preventDefault();
 
-//       }))
-//     }
-//   }
-// }
+      dispatch(createUser({
+        firstName: ev.target.firstName.value,
+        lastName: ev.target.firstName.value,
+        email: ev.target.email.value,
+        password: ev.target.password.value
 
-// export default connect(null, mapDispatchToProps)(SignUp);
+      }))
+    }
+  }
+}
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+// export default SignUp;

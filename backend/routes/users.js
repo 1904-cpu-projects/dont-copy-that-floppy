@@ -12,4 +12,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+    if(!(await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    }))){
+      const user = await User.create(req.body);
+      res.send(user);
+    }else{
+      res.status(401).send("Account Already Exists")
+    }
+})
+
 module.exports = router
