@@ -18,6 +18,9 @@ const CREATE_USER = "CREATE_USER";
 // Catch Errors
 const CATCH_ERROR = "CATCH_ERROR";
 
+// Cart Actions
+const ADD_PRODUCT = "ADD_PRODUCT";
+
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
@@ -64,12 +67,21 @@ const errorReducer = (state = "", action)=>{
   return state;
 }
 
+const cartReducer = (state = [], action) => {
+  switch (action.type) {
+    case ADD_PRODUCT:
+      return [...state, action.addedProduct]
+  }
+  return state;
+}
+
 const reducer = combineReducers({
   products: productsReducer,
   categories: categoriesReducer,
   loggedInUser: loginReducer,
   user: userReducer,
   error: errorReducer,
+  addedProduct: cartReducer
 });
 
 const _setProducts = products => {
@@ -110,6 +122,13 @@ const _catchError = (error)=>{
   return {
     type: CATCH_ERROR,
     error
+  }
+}
+
+const _addProduct = (addedProduct)=> {
+  return {
+    type: ADD_PRODUCT,
+    addedProduct
   }
 }
 
@@ -154,7 +173,18 @@ const createUser = (user) => {
   }
 }
 
+const addProduct = (addedProduct) => {
+  return async dispatch => {
+    try {
+      const response = await axios.post('/api/cart', addedProduct);
+      dispatch(_addProduct(response.data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { setProducts, setCategories, loginUser, createUser, logoutUser };
+export { setProducts, setCategories, loginUser, createUser, logoutUser, addProduct };
