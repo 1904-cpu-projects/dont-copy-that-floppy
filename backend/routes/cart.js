@@ -3,15 +3,6 @@ const router = express.Router()
 const { models } = require('../index')
 const { Product } = models
 
-router.get('/', async (req, res, next) => {
-  try{
-    const cart = await Product.findAll()
-    res.send(cart)
-  } catch (ex) {
-    next(ex)
-  }
-})
-
 router.post('/', async (req, res, next) => {
   try {
     const product = await Product.findOne({
@@ -24,5 +15,6 @@ router.post('/', async (req, res, next) => {
     next(ex);
   }
 })
+
 
 module.exports = router

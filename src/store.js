@@ -20,6 +20,7 @@ const CATCH_ERROR = "CATCH_ERROR";
 
 // Cart Actions
 const ADD_PRODUCT = "ADD_PRODUCT";
+const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 const productsReducer = (state = [], action) => {
   switch (action.type) {
@@ -71,6 +72,9 @@ const cartReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return [...state, action.addedProduct]
+    case DELETE_PRODUCT:
+      const updatedProducts = state.filter(product => {return product.id !== action.deletedProduct.id})
+      return updatedProducts
   }
   return state;
 }
@@ -81,7 +85,8 @@ const reducer = combineReducers({
   loggedInUser: loginReducer,
   user: userReducer,
   error: errorReducer,
-  addedProduct: cartReducer
+  addedProduct: cartReducer,
+  deletedProduct: cartReducer
 });
 
 const _setProducts = products => {
@@ -125,10 +130,17 @@ const _catchError = (error)=>{
   }
 }
 
-const _addProduct = (addedProduct)=> {
+const _addProduct = (addedProduct) => {
   return {
     type: ADD_PRODUCT,
     addedProduct
+  }
+}
+
+const _deleteProduct = (deletedProduct) => {
+  return {
+    type: DELETE_PRODUCT,
+    deletedProduct
   }
 }
 
@@ -184,7 +196,17 @@ const addProduct = (addedProduct) => {
   }
 }
 
+const deleteProduct = (deletedProduct) => {
+  return async dispatch => {
+    try {
+      await dispatch(_deleteProduct(deletedProduct))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { setProducts, setCategories, loginUser, createUser, logoutUser, addProduct };
+export { setProducts, setCategories, loginUser, createUser, logoutUser, addProduct, deleteProduct };
