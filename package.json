@@ -8,6 +8,7 @@
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./backend/server.js --ignore dist --ignore src",
+    "start": "node ./backend/server.js",
     "seed": "node ./backend/seed.js",
     "test": "mocha ./backend/specs.js --watch"
   },
