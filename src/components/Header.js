@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import { logoutUser } from '../store';
 
 const Header = ({ products, user, loggedInUser, handleLogout, addedProduct }) => {
-  console.log(loggedInUser.email);
   return (
     <div>
       <Link to='/'>Home</Link>

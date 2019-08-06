@@ -33,10 +33,13 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/login', async (req, res, next) => {
-  if (req.session.email) {
-    res.send(req.session.email);
-  } else {
-    res.sendStatus(400);
+  try{
+    if (req.session.email) {
+      res.send(req.session.email);
+    }
+  }
+  catch(ex){
+    next(ex);
   }
 });
 
