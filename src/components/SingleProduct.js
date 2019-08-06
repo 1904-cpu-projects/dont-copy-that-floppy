@@ -23,12 +23,17 @@ const SingleProduct = ({ product, addProductToCart }) => {
         />
       </div>
       <div className="card-body">
-        <h5 className="card-title">{product.name}</h5>
+        <h5 className="card-title">
+          {product.name}
+          <p>
+            <small> by {product.brand}</small>
+          </p>
+        </h5>
         <p className="card-text">{product.description}</p>
         <p className="card-text">{`$${product.price}`}</p>
         <Link to="/cart">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary mt-auto"
             onClick={() => addProductToCart(product)}
           >
             Add to Cart
