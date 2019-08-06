@@ -54,7 +54,8 @@ const sampleComputers = [
     brand: 'Macintosh',
     description:
       'Remember this old cubey thing?! Perfect place to stick a floppy and play some Oregon Trail!',
-    quantity: 15
+    quantity: 15,
+    imageUrl: 'https://i.imgur.com/aOZ3pqs.jpg'
   },
   {
     name: 'OG PC',
@@ -62,7 +63,8 @@ const sampleComputers = [
     brand: 'IBM',
     description:
       'Clearly having the keyboard attached to the monitor was a great idea. Get yours today!',
-    quantity: 11
+    quantity: 11,
+    imageUrl: 'https://i.imgur.com/9nzl7xd.jpg'
   },
   {
     name: 'The Box 3.0',
@@ -70,7 +72,8 @@ const sampleComputers = [
     brand: 'Hooli',
     description:
       "Gavin Belson's Sugnature Box. Stick it in a server farm and forget about it!",
-    quantity: 6
+    quantity: 6,
+    imageUrl: 'https://i.imgur.com/M5r0VHJ.png'
   },
   {
     name: 'GPU Rack named Anton',
@@ -78,7 +81,8 @@ const sampleComputers = [
     brand: 'Dell',
     description:
       'Are you looking to build a server in your garage to avoid those hefty hosting costs?! If so, Anton will be your new best friend.',
-    quantity: 1
+    quantity: 1,
+    imageUrl: 'https://i.imgur.com/W77FVVQ.jpg'
   },
   {
     name: 'Abacus',
@@ -86,7 +90,8 @@ const sampleComputers = [
     brand: 'The Original Calculator, Inc.',
     description:
       'Count things by hand, forever. The only calculator you will ever need. Unless, you are trying to solve the Riemann Hypothesis.',
-    quantity: 150
+    quantity: 150,
+    imageUrl: 'https://i.imgur.com/L4hdBxP.jpg'
   },
   {
     name: 'The Enigma Lite',
@@ -94,7 +99,8 @@ const sampleComputers = [
     brand: 'German Electronics',
     description:
       'Buy your very own enigma machine. Only problem is, Alan Turing decoded the algorithm back in the 40s. Still fun though!',
-    quantity: 250
+    quantity: 250,
+    imageUrl: 'https://i.imgur.com/N00KqMP.jpg'
   }
 ];
 
@@ -105,14 +111,16 @@ const samplePhones = [
     brand: 'Motorola',
     description:
       "You can do that spinny thing with this phone. Even if you aren't calling anyone. Give it a try!",
-    quantity: 25
+    quantity: 25,
+    imageUrl: 'https://i.imgur.com/Gwdf7Wj.jpg'
   },
   {
     name: 'Rotary Phone - White',
     price: 10,
     brand: 'Nokia',
     description: 'Another spinny. This one in white. Use it to call your mom.',
-    quantity: 20
+    quantity: 20,
+    imageUrl: 'https://i.imgur.com/I7JKiFm.jpg'
   },
   {
     name: 'Outdoor Rotary Phone',
@@ -120,7 +128,8 @@ const samplePhones = [
     brand: 'Samsung',
     description:
       'This rotary phone works outdoors! Just look at the photo. First weather-proof rotary phone.',
-    quantity: 25
+    quantity: 25,
+    imageUrl: 'https://i.imgur.com/BHYfBAx.jpg'
   },
   {
     name: 'Pay Phone',
@@ -128,7 +137,8 @@ const samplePhones = [
     brand: 'Bell',
     description:
       'Have you ever wanted your own pay phone?! Well you are in luck.',
-    quantity: 2
+    quantity: 2,
+    imageUrl: 'https://i.imgur.com/zTxLdvq.jpg'
   }
 ];
 
@@ -139,7 +149,8 @@ const sampleRadios = [
     brand: 'RCA',
     description:
       'Get your groove on with this mini radio. Do not let its size fool you. This thing packs a punch!',
-    quantity: 67
+    quantity: 67,
+    imageUrl: 'https://i.imgur.com/VsWqRNa.jpg'
   },
   {
     name: "Grandpa's Dial Radio",
@@ -147,7 +158,8 @@ const sampleRadios = [
     brand: 'Magnadyne',
     description:
       'Is grandpa turning on the radio or trying to communicate with alien lifeforms? Now you can find out for yourself!',
-    quantity: 13
+    quantity: 13,
+    imageUrl: 'https://i.imgur.com/dRDhhWy.jpg'
   },
   {
     name: 'Ghetto Blaster',
@@ -155,7 +167,8 @@ const sampleRadios = [
     brand: 'Crown',
     description:
       'Everyone will know how cool you are when you start walking around with this radio! Everyone will want to be your friend.',
-    quantity: 5
+    quantity: 5,
+    imageUrl: 'https://i.imgur.com/LmlINqc.jpg'
   },
   {
     name: 'Classic Dual Deck',
@@ -163,7 +176,8 @@ const sampleRadios = [
     brand: 'Panasonic',
     description:
       "What is better than one tape deck?! That's right! Two tape decks.",
-    quantity: 500
+    quantity: 500,
+    imageUrl: 'https://i.imgur.com/AAitizg.jpg'
   },
   {
     name: 'Serious Speakers',
@@ -171,7 +185,8 @@ const sampleRadios = [
     brand: 'Sony',
     description:
       'Are you serious about sound and do not care about how much space your speakers need?!? Then this is the radio for you.',
-    quantity: 9
+    quantity: 9,
+    imageUrl: 'https://i.imgur.com/tcxOqFV.jpg'
   }
 ];
 
@@ -181,21 +196,24 @@ const sampleTvs = [
     price: 9.99,
     brand: 'Zenith',
     description: 'The name says it all.',
-    quantity: 3
+    quantity: 3,
+    imageUrl: 'https://i.imgur.com/rqnjAUT.jpg'
   },
   {
     name: 'ColorBox',
     price: 19.99,
     brand: 'Magnavox',
     description: 'One of the original color TVs. Still looks okay.',
-    quantity: 33
+    quantity: 33,
+    imageUrl: 'https://i.imgur.com/Bka9U9r.jpg'
   },
   {
     name: 'AlienBox',
     price: 29.99,
     brand: 'Sony',
     description: "This TV has four legs. Don't let it run away!",
-    quantity: 13
+    quantity: 13,
+    imageUrl: 'https://i.imgur.com/vTeztxT.jpg'
   },
   {
     name: 'DialBox',
@@ -203,7 +221,8 @@ const sampleTvs = [
     brand: 'RCA',
     description:
       'You have to get up to change the channel. So get this TV and skip the gym!',
-    quantity: 23
+    quantity: 23,
+    imageUrl: 'https://i.imgur.com/ByYGPEX.jpg'
   },
   {
     name: 'Woodgrain TV',
@@ -211,14 +230,16 @@ const sampleTvs = [
     brand: 'LG',
     description:
       'This TV comes wrapped in a beautiful mahogany. Is it a TV or a tree?!',
-    quantity: 21
+    quantity: 21,
+    imageUrl: 'https://i.imgur.com/4M6R4Pa.jpg'
   },
   {
     name: 'AntennaBox',
     price: 7,
     brand: 'ACME',
     description: 'If Bugs Bunny was a TV, this would be it!',
-    quantity: 7
+    quantity: 7,
+    imageUrl: 'https://i.imgur.com/3bl4Btu.png'
   }
 ];
 
@@ -228,14 +249,16 @@ const sampleVideoGames = [
     price: 39.99,
     brand: 'Amstrad',
     description: 'Enjoy this vintage flight simulator machine.',
-    quantity: 17
+    quantity: 17,
+    imageUrl: 'https://i.imgur.com/n8RqobT.jpg'
   },
   {
     name: 'Jaguar',
     price: 49.99,
     brand: 'Atari',
     description: 'One of the first game controllers ever made.',
-    quantity: 17
+    quantity: 17,
+    imageUrl: 'https://i.imgur.com/WPUyKKZ.jpg'
   },
   {
     name: 'Virtual Boy',
@@ -243,7 +266,8 @@ const sampleVideoGames = [
     brand: 'SEGA',
     description:
       'Get ready for a fully immersive VR experience. Are you a Virtual Boy?!',
-    quantity: 19
+    quantity: 19,
+    imageUrl: 'https://i.imgur.com/jy9Fdke.jpg'
   },
   {
     name: 'Game Gear',
@@ -251,21 +275,24 @@ const sampleVideoGames = [
     brand: 'SEGA',
     description:
       'Move over GameBoy! This portable gaming system lets you take your game anywhere.',
-    quantity: 29
+    quantity: 29,
+    imageUrl: 'https://i.imgur.com/rfdneTq.jpg'
   },
   {
     name: 'Nintendo ES',
     price: 59.99,
     brand: 'Nintendo',
     description: 'If you do not know about this system then move along.',
-    quantity: 100
+    quantity: 100,
+    imageUrl: 'https://i.imgur.com/0vapjD4.jpg'
   },
   {
     name: 'GameBoy',
     price: 29.99,
     brand: 'Nintendo',
     description: 'The classic GameBoy!',
-    quantity: 150
+    quantity: 150,
+    imageUrl: 'https://i.imgur.com/mNu5eUG.jpg'
   }
 ];
 
