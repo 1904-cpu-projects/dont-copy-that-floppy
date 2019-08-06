@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect} from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { deleteProduct } from '../store';
 
-const Cart = ({addedProduct}) => {
+const Cart = ({addedProduct, deleteProductFromCart}) => {
   return (
     <div style={{
       display: 'flex',
@@ -31,7 +32,7 @@ const Cart = ({addedProduct}) => {
           <p className="card-text">{product.description}</p>
           <p className="card-text">{`$${product.price}`}</p>
           <Link to="/cart">
-            Remove from Cart
+            <button onClick={() => deleteProductFromCart(product)}>Remove from Cart</button>
           </Link>
         </div>
       </div>)}
@@ -46,4 +47,10 @@ const mapStateToProps = ({ addedProduct }) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteProductFromCart: event => {dispatch(deleteProduct(event))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
