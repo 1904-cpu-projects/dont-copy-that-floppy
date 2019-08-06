@@ -12,6 +12,9 @@ const Sidebar = ({ categories }) => {
               <i className="icon-menu" /> Categories
             </header>
             <ul className="menu-category">
+              <Link to="/products">
+                <li>All Products</li>
+              </Link>
               {categories.map(category => {
                 return (
                   <Link
