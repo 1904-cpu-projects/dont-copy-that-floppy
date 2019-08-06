@@ -68,7 +68,7 @@ const mapDispatchToProps = ( dispatch )=>{
 
       dispatch(createUser({
         firstName: ev.target.firstName.value,
-        lastName: ev.target.firstName.value,
+        lastName: ev.target.lastName.value,
         email: ev.target.email.value,
         password: ev.target.password.value
 
