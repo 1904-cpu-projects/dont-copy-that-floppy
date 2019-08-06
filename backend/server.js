@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
+app.use('/api/cart', require('./routes/cart'));
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../index.html'));
