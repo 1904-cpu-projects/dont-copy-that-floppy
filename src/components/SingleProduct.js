@@ -38,7 +38,7 @@ const SingleProduct = ({ product, addProductToCart }) => {
               : 'Out of stock.'}
           </small>
         </p>
-        <Link to="/cart">
+        <Link>
           <button
             className="btn btn-primary mt-auto"
             onClick={() => addProductToCart(product)}
