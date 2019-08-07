@@ -20,7 +20,13 @@ class App extends React.Component {
   render() {
     return (
       <HashRouter>
-        <h2>Floppy Shoppy</h2>
+        <h2>
+          <img
+            style={{ width: 100, height: 100 }}
+            src="https://i.imgur.com/BOdXYeP.png"
+          />
+          Floppy Shoppy
+        </h2>
         <Route path="/" component={Header} />
         <Route path="/" component={Sidebar} />
         <Route exact path="/" component={Home} />
@@ -38,7 +44,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadProducts: () => dispatch(setProducts()),
     loadCategories: () => dispatch(setCategories()),
-    loadSession: () => dispatch(loginUser()),
+    loadSession: () => dispatch(loginUser())
   };
 };
 
