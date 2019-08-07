@@ -296,6 +296,4 @@ const sampleVideoGames = [
   }
 ];
 
-seed();
-
 module.exports = seed;

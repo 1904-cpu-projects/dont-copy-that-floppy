@@ -9,8 +9,13 @@ const { User } = models;
 const saltHash = require('./utils');
 const distPath = path.join(__dirname, '../dist');
 const dotenv = require('dotenv');
+const seed = req('./seed')
 
 dotenv.config();
+
+if(process.env.SEED) {
+  seed()
+}
 
 app.use(cookie_parser());
 app.use(express.static(distPath));
