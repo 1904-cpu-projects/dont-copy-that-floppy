@@ -9,7 +9,7 @@ const { User } = models;
 const saltHash = require('./utils');
 const distPath = path.join(__dirname, '../dist');
 const dotenv = require('dotenv');
-const seed = req('./seed')
+const seed = require('./seed')
 
 dotenv.config();
 
