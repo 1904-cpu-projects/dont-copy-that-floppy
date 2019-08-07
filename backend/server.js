@@ -3,13 +3,19 @@ const app = express();
 const path = require('path');
 const session = require('express-session');
 const cookie_parser = require('cookie-parser');
-const port = process.env.PORT || 3000;
+const passport = require('passport');
 const { models } = require('./index');
 const { User } = models;
 const saltHash = require('./utils');
 const distPath = path.join(__dirname, '../dist');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 app.use(cookie_parser());
+app.use(express.static(distPath));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use(
   session({
@@ -19,26 +25,28 @@ app.use(
   })
 );
 
-app.use(express.static(distPath));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
+app.use('/google', require('./routes/oauth'));
 
 app.get('/', (req, res, next) => {
+  if (req.user) {
+    req.session.email = req.user.dataValues.email;
+  }
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.get('/login', async (req, res, next) => {
-  try{
+  try {
     if (req.session.email) {
       res.send(req.session.email);
     }
-  }
-  catch(ex){
+  } catch (ex) {
     next(ex);
   }
 });
@@ -71,19 +79,16 @@ app.post('/login', async (req, res, next) => {
 });
 
 app.delete('/login', async (req, res, next) => {
-  try{
-    if(req.session.email){
+  try {
+    if (req.session.email) {
       delete req.session.email;
       res.sendStatus(204);
-    }else{
-      console.log("this should never appear, check code in app.delete route");
+    } else {
+      console.log('this should never appear, check code in app.delete route');
     }
+  } catch (ex) {
+    next(ex);
   }
-  catch (ex) {
-    next(ex)
-  }
-})
-
-app.listen(port, () => console.log(`listening on PORT ${port}`));
+});
 
 module.exports = app;

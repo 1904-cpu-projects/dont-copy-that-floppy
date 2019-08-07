@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { loginUser } from '../store';
+import OauthLoginForm from './OauthLoginForm';
 
 class Login extends React.Component {
   constructor() {
@@ -58,6 +59,7 @@ class Login extends React.Component {
           <br />
           <button type="submit">Log In</button>
         </form>
+        <OauthLoginForm />
         {error ? <h4>{error}</h4> : ''}
       </div>
     );

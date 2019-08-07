@@ -28,13 +28,17 @@ const User = db.define(
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false
-    }
+    },
+    googleId: Sequelize.STRING
   },
   {
     hooks: {
       beforeCreate: users => {
+        if (!users.password) {
+          users.password = null
+        } else {
         users.password = saltHash(users.password);
+        }
       }
     }
   }
