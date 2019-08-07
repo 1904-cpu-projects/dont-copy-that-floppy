@@ -20,7 +20,7 @@ passport.use(
 new GoogleStrategy({
   clientID: process.env.GClientId,
   clientSecret:  process.env.GClientSecret,
-  callbackURL: 'http://localhost:3000/google/callback'
+  callbackURL: (process.env.NODE_ENV === "production") ? http://http://dont-copy-that-floppy.herokuapp.com/google/callback  : 'http://localhost:3000/google/callback'
 },
 (token, refreshToken, profile, done) => {
   const info =  {
