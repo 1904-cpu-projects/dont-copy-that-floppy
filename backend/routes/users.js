@@ -25,4 +25,17 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.get('/:id/orders', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+      })
+    res.send(user.orders)
+  } catch (ex) {
+    next(ex)
+  }
+})
+
 module.exports = router
