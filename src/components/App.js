@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 import Checkout from './Checkout'
 import { store, setProducts, setCategories, loginUser } from '../store';
 import { connect } from 'react-redux';
+import SingleProduct from './SingleProduct';
 
 class App extends React.Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ class App extends React.Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/products/search/:name" />
       </HashRouter>
     );
   }
