@@ -1,80 +1,102 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { logoutUser } from '../store';
 import SingleProduct from './SingleProduct';
 
-class Header extends React.Component{
-  constructor(){
+class Header extends React.Component {
+  constructor() {
     super();
     this.state = {
-      searchItem: '',
-    }
+      searchItem: ''
+    };
     this.handleSearch = this.handleSearch.bind(this);
     this.reset = this.reset.bind(this);
   }
 
-  handleSearch (ev){
+  handleSearch(ev) {
     event.preventDefault();
     this.state.searchItem = ev.target.searchItem.value;
-    this.props.history.push(`/products/search/${this.state.searchItem}`)
+    this.props.history.push(`/products/search/${this.state.searchItem}`);
     ev.target.searchItem.value = '';
   }
 
-  reset (ev){
+  reset(ev) {
     event.preventDefault();
     this.state.searchItem = '';
     this.props.history.push(`/products`);
   }
 
-  render(){
-    const {searchItem} = this.state;
-    const {handleSearch, reset} = this;
-    const {products, user, loggedInUser, handleLogout, addedProduct} = this.props;
+  render() {
+    const { searchItem } = this.state;
+    const { handleSearch, reset } = this;
+    const {
+      products,
+      user,
+      loggedInUser,
+      handleLogout,
+      addedProduct
+    } = this.props;
 
     return (
       <div>
-        <Link to='/'>Home</Link>
-        <Link to='/products'>Products ({products.length})</Link>
-        <Link to='/cart'>Cart ({addedProduct.length})</Link>
-        <Link to='/login'>{loggedInUser.email ? <button onClick = {()=>handleLogout()}>Logout {loggedInUser.email}</button>  : `Login` }</Link>
-        <Link to='/signup'>{(!loggedInUser.email) ? "Sign Up" : ""}</Link>
+        <Link to="/">Home</Link>
+        <Link to="/products">Products ({products.length})</Link>
+        <Link to="/cart">Cart ({addedProduct.length})</Link>
+        <Link to="/login">
+          {loggedInUser.email ? (
+            <button onClick={() => handleLogout()}>
+              Logout {loggedInUser.email}
+            </button>
+          ) : (
+            `Login`
+          )}
+        </Link>
+        <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>
 
         <form onSubmit={handleSearch}>
-          <input type="text" name="searchItem"/>
+          <input type="text" name="searchItem" />
           <button>Search</button>
-          <button onClick = {reset}>Clear Result</button>
+          <button onClick={reset}>Clear Result</button>
         </form>
 
-
-        {products.filter((product) => ((product.name).toLowerCase() === searchItem.toLowerCase())).length !== 0 ?
-        products.filter((product) => ((product.name).toLowerCase() === searchItem.toLowerCase())).map(product => (<SingleProduct product={product} key={product.id}/>)) : "No Products Found"}
-
-
+        {products.filter(
+          product => product.name.toLowerCase() === searchItem.toLowerCase()
+        ).length !== 0
+          ? products
+              .filter(
+                product =>
+                  product.name.toLowerCase() === searchItem.toLowerCase()
+              )
+              .map(product => (
+                <SingleProduct product={product} key={product.id} />
+              ))
+          : 'No Products Found'}
       </div>
-    )
+    );
+  }
 }
 
-}
-
-const mapStateToProps = ({products, user, loggedInUser, addedProduct})=>{
+const mapStateToProps = ({ products, user, loggedInUser, addedProduct }) => {
   return {
     products,
     user,
     loggedInUser,
     addedProduct
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = dispatch => {
   return {
-    handleLogout: function(ev){
+    handleLogout: function(ev) {
       event.preventDefault();
 
       dispatch(logoutUser());
     }
-  }
+  };
+};
 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
