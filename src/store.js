@@ -42,7 +42,7 @@ const categoriesReducer = (state = [], action) => {
 const loginReducer = (state = { email: "" }, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return {...state, email: action.email}
+      return { ...state, email: action.email }
     case LOGOUT_USER:
       state = {}
       return state
@@ -50,7 +50,7 @@ const loginReducer = (state = { email: "" }, action) => {
   return state
 };
 
-const userReducer = (state = {}, action)=>{
+const userReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_USER:
       return action.user
@@ -59,7 +59,7 @@ const userReducer = (state = {}, action)=>{
   return state;
 }
 
-const errorReducer = (state = "", action)=>{
+const errorReducer = (state = "", action) => {
   switch (action.type) {
     case CATCH_ERROR:
       return action.error
@@ -71,9 +71,15 @@ const errorReducer = (state = "", action)=>{
 const cartReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_PRODUCT:
+      const alreadyAdded = state.forEach(product => {
+        if (product.id === action.addedProduct.id) {
+          product.quantity++
+          return alreadyAdded
+        }})
+      action.addedProduct.quantity = 1;
       return [...state, action.addedProduct]
     case DELETE_PRODUCT:
-      const updatedProducts = state.filter(product => {return product.id !== action.deletedProduct.id})
+      const updatedProducts = state.filter(product => { return product.id !== action.deletedProduct.id })
       return updatedProducts
   }
   return state;
@@ -110,20 +116,20 @@ const _loginUser = email => {
   }
 }
 
-const _logoutUser = ()=>{
+const _logoutUser = () => {
   return {
     type: LOGOUT_USER
   }
 }
 
-const _createUser = (user)=>{
+const _createUser = (user) => {
   return {
     type: CREATE_USER,
     user
   }
 }
 
-const _catchError = (error)=>{
+const _catchError = (error) => {
   return {
     type: CATCH_ERROR,
     error
@@ -174,12 +180,12 @@ const logoutUser = () => {
 
 const createUser = (user) => {
   return async dispatch => {
-    try{
+    try {
       const response = await axios.post("/api/users", user);
       dispatch(_createUser(response.data));
       window.location.hash = '/login';
     }
-    catch(ex){
+    catch (ex) {
       dispatch(_catchError(ex.response.data));
     }
   }

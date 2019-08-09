@@ -19,7 +19,7 @@ const SingleProduct = ({ product, addProductToCart }) => {
           className="card-img-top center"
           src={product.imageUrl}
           alt="product image"
-          style={{ width: 350, height: 250 }}
+          style={{ width: '100%', height: 250 }}
         />
       </div>
       <div className="card-body">
@@ -31,7 +31,14 @@ const SingleProduct = ({ product, addProductToCart }) => {
         </h5>
         <p className="card-text">{product.description}</p>
         <p className="card-text">{`$${product.price}`}</p>
-        <Link to="/cart">
+        <p>
+          <small>
+            {product.isAvailable
+              ? `In Stock. ${product.quantity} available.`
+              : 'Out of stock.'}
+          </small>
+        </p>
+        <Link>
           <button
             className="btn btn-primary mt-auto"
             onClick={() => addProductToCart(product)}

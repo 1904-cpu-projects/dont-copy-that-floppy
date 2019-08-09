@@ -7,8 +7,10 @@ import Products from './Products';
 import Cart from './Cart';
 import Login from './Login';
 import SignUp from './SignUp';
+import Checkout from './Checkout'
 import { store, setProducts, setCategories, loginUser } from '../store';
 import { connect } from 'react-redux';
+import SingleProduct from './SingleProduct';
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,7 +22,13 @@ class App extends React.Component {
   render() {
     return (
       <HashRouter>
-        <h2>Floppy Shoppy</h2>
+        <h2>
+          <img
+            style={{ width: 100, height: 100 }}
+            src="https://i.imgur.com/BOdXYeP.png"
+          />
+          Floppy Shoppy
+        </h2>
         <Route path="/" component={Header} />
         <Route path="/" component={Sidebar} />
         <Route exact path="/" component={Home} />
@@ -29,6 +37,8 @@ class App extends React.Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/products/search/:name" />
       </HashRouter>
     );
   }
@@ -38,7 +48,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadProducts: () => dispatch(setProducts()),
     loadCategories: () => dispatch(setCategories()),
-    loadSession: () => dispatch(loginUser()),
+    loadSession: () => dispatch(loginUser())
   };
 };
 

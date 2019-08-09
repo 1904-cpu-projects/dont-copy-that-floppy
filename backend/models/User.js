@@ -29,7 +29,13 @@ const User = db.define(
     password: {
       type: Sequelize.STRING,
     },
-    googleId: Sequelize.STRING
+    googleId: {
+      type: Sequelize.STRING
+    },
+    orders: {
+      type: Sequelize.JSON,
+      defaultValue: []
+    }
   },
   {
     hooks: {
