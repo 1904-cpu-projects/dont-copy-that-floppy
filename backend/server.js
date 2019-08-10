@@ -49,7 +49,12 @@ app.get('/', (req, res, next) => {
 app.get('/login', async (req, res, next) => {
   try {
     if (req.session.email) {
-      res.send(req.session.email);
+      const user = await User.findOne({
+        where: {
+          email: req.session.email,
+        }
+      })
+      res.send(user);
     }
   } catch (ex) {
     next(ex);
