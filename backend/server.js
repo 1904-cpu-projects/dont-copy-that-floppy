@@ -18,7 +18,6 @@ if(process.env.SEED) {
 }
 
 app.use(cookie_parser());
-app.use(express.static(distPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -33,11 +32,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(distPath));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/google', require('./routes/oauth'));
+app.use('/api/admin', require('./routes/admin'))
 
 app.get('/', (req, res, next) => {
   if (req.user) {
