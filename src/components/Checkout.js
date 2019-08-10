@@ -61,7 +61,7 @@ const Checkout = ({ addedProduct }) => {
         </label>
         <br />
       </form>
-      <button>Place Order</button>
+      <Link to='/orderconfirmation'><button>Place Order</button></Link>
     </div>
   );
 }
