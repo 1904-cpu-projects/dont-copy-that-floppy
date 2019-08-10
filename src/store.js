@@ -21,6 +21,7 @@ const CATCH_ERROR = "CATCH_ERROR";
 // Cart Actions
 const ADD_PRODUCT = "ADD_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
+const CHANGE_QUANTITY = "SUBTRACT_QUANTITY"
 
 const productsReducer = (state = [], action) => {
   switch (action.type) {
@@ -78,6 +79,13 @@ const cartReducer = (state = [], action) => {
     case DELETE_PRODUCT:
       const updatedProducts = state.filter(product => { return product.id !== action.deletedProduct.id })
       return updatedProducts
+    case CHANGE_QUANTITY:
+      state.forEach(product => {
+        if (product.id === action.product.productId) {
+          product.quantity = action.product.newQuantity
+        }
+      return state
+      })
   }
   return state;
 }
@@ -89,7 +97,8 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   addedProduct: cartReducer,
-  deletedProduct: cartReducer
+  deletedProduct: cartReducer,
+  changeQuantity: cartReducer
 });
 
 const _setProducts = products => {
@@ -144,6 +153,13 @@ const _deleteProduct = (deletedProduct) => {
   return {
     type: DELETE_PRODUCT,
     deletedProduct
+  }
+}
+
+const _changeQuantity = (product) => {
+  return {
+    type: CHANGE_QUANTITY,
+    product
   }
 }
 
@@ -211,7 +227,17 @@ const deleteProduct = (deletedProduct) => {
   }
 }
 
+const changeQuantity = (product) => {
+  return async dispatch => {
+    try {
+      await dispatch(_changeQuantity(product))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
-export { setProducts, setCategories, loginUser, createUser, logoutUser, addProduct, deleteProduct };
+export { setProducts, setCategories, loginUser, createUser, logoutUser, addProduct, deleteProduct, changeQuantity };
