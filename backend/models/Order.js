@@ -8,7 +8,10 @@ const Order = db.define('orders', {
     defaultValue: Sequelize.UUIDV4
   },
   items: {
-    type: Sequelize.ARRAY()
+    type: Sequelize.STRING
+  },
+  totalPrice: {
+    type: Sequelize.DECIMAL
   }
 })
  module.exports = Order
