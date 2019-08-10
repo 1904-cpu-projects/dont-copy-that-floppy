@@ -27,7 +27,6 @@ const productsReducer = (state = [], action) => {
     case SET_PRODUCTS:
       return [...state, action.products].flat();
   }
-
   return state;
 };
 
@@ -39,10 +38,10 @@ const categoriesReducer = (state = [], action) => {
   return state;
 };
 
-const loginReducer = (state = { email: "" }, action) => {
+const loginReducer = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, email: action.email }
+      return action.user
     case LOGOUT_USER:
       state = {}
       return state
@@ -55,18 +54,16 @@ const userReducer = (state = {}, action) => {
     case CREATE_USER:
       return action.user
   }
-
   return state;
-}
+};
 
 const errorReducer = (state = "", action) => {
   switch (action.type) {
     case CATCH_ERROR:
       return action.error
   }
-
   return state;
-}
+};
 
 const cartReducer = (state = [], action) => {
   switch (action.type) {
@@ -109,10 +106,10 @@ const _setCategories = categories => {
   };
 };
 
-const _loginUser = email => {
+const _loginUser = user => {
   return {
     type: LOGIN_USER,
-    email
+    user
   }
 }
 
@@ -167,7 +164,9 @@ const setCategories = () => {
 const loginUser = () => {
   return async dispatch => {
     const response = await axios.get("/login")
-    return dispatch(_loginUser(response.data))
+    dispatch(_loginUser(response.data))
+    window.location.hash = '/';
+
   }
 }
 
