@@ -10,8 +10,10 @@ const Order = db.define('orders', {
   items: {
     type: Sequelize.STRING
   },
-  totalPrice: {
-    type: Sequelize.DECIMAL
-  }
 })
+
+Order.prototype.totalPrice = () => {
+ console.log(this)
+}
+
  module.exports = Order

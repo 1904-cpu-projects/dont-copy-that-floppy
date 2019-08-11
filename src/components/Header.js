@@ -16,14 +16,14 @@ class Header extends React.Component {
 
   handleSearch(ev) {
     event.preventDefault();
-    this.state.searchItem = ev.target.searchItem.value;
+    this.setState({searchItem: ev.target.searchItem.value});
     this.props.history.push(`/products/search/${this.state.searchItem}`);
     ev.target.searchItem.value = '';
   }
 
   reset(ev) {
     event.preventDefault();
-    this.state.searchItem = '';
+    this.setState({searchItem: ''}) ;
     this.props.history.push(`/products`);
   }
 

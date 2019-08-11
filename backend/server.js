@@ -38,7 +38,6 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/google', require('./routes/oauth'));
-app.use('/api/admin', require('./routes/admin'))
 
 app.get('/', (req, res, next) => {
   if (req.user) {
