@@ -30,6 +30,19 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+         id: req.params.id
+      }
+    })
+    res.send(user)
+  } catch (ex) {
+    next(ex)
+  }
+})
+
 router.get('/:id/orders', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
