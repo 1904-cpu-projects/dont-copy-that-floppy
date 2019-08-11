@@ -41,7 +41,6 @@ router.post('/', async (req, res, next) => {
       brand: req.body.brand,
       quantity: req.body.quantity,
       description: req.body.description,
-      isAvailable: req.body.isAvailable
     });
     res.status(201).send(newProduct);
   } catch (ex) {
