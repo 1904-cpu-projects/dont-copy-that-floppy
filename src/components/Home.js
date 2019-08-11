@@ -1,13 +1,20 @@
 import React from 'react';
 import Carousel from './Carousel';
+import { connect } from 'react-redux';
 
-const Home = () => {
+const Home = ({ loggedInUser }) => {
   return (
     <div>
-      <div>Welcome!</div>
+      <div>Welcome! {loggedInUser.email ? `${loggedInUser.firstName} ${loggedInUser.lastName}` : ''}</div>
       <Carousel />
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

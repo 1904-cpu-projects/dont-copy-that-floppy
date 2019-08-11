@@ -19,15 +19,15 @@ const CREATE_USER = 'CREATE_USER';
 const CATCH_ERROR = 'CATCH_ERROR';
 
 // Cart Actions
-const ADD_PRODUCT = 'ADD_PRODUCT';
-const DELETE_PRODUCT = 'DELETE_PRODUCT';
+const ADD_PRODUCT = "ADD_PRODUCT";
+const DELETE_PRODUCT = "DELETE_PRODUCT";
+const CHANGE_QUANTITY = "SUBTRACT_QUANTITY"
 
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return [...state, action.products].flat();
   }
-
   return state;
 };
 
@@ -39,10 +39,10 @@ const categoriesReducer = (state = [], action) => {
   return state;
 };
 
-const loginReducer = (state = { email: '' }, action) => {
+const loginReducer = (state = {}, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, email: action.email };
+      return action.user
     case LOGOUT_USER:
       state = {};
       return state;
@@ -55,7 +55,6 @@ const userReducer = (state = {}, action) => {
     case CREATE_USER:
       return action.user;
   }
-
   return state;
 };
 
@@ -64,7 +63,6 @@ const errorReducer = (state = '', action) => {
     case CATCH_ERROR:
       return action.error;
   }
-
   return state;
 };
 
@@ -80,10 +78,16 @@ const cartReducer = (state = [], action) => {
       action.addedProduct.quantity = 1;
       return [...state, action.addedProduct];
     case DELETE_PRODUCT:
-      const updatedProducts = state.filter(product => {
-        return product.id !== action.deletedProduct.id;
-      });
-      return updatedProducts;
+
+      const updatedProducts = state.filter(product => { return product.id !== action.deletedProduct.id })
+      return updatedProducts
+    case CHANGE_QUANTITY:
+      state.forEach(product => {
+        if (product.id === action.product.productId) {
+          product.quantity = action.product.newQuantity
+        }
+      return state
+      })
   }
   return state;
 };
@@ -95,7 +99,8 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   addedProduct: cartReducer,
-  deletedProduct: cartReducer
+  deletedProduct: cartReducer,
+  changeQuantity: cartReducer
 });
 
 const _setProducts = products => {
@@ -112,12 +117,13 @@ const _setCategories = categories => {
   };
 };
 
-const _loginUser = email => {
+const _loginUser = user => {
   return {
     type: LOGIN_USER,
-    email
-  };
-};
+    user
+  }
+}
+
 
 const _logoutUser = () => {
   return {
@@ -153,6 +159,13 @@ const _deleteProduct = deletedProduct => {
   };
 };
 
+const _changeQuantity = (product) => {
+  return {
+    type: CHANGE_QUANTITY,
+    product
+  }
+}
+
 const setProducts = () => {
   return async dispatch => {
     const response = await axios.get('/api/products');
@@ -169,10 +182,12 @@ const setCategories = () => {
 
 const loginUser = () => {
   return async dispatch => {
-    const response = await axios.get('/login');
-    return dispatch(_loginUser(response.data));
-  };
-};
+    const response = await axios.get("/login")
+    dispatch(_loginUser(response.data))
+    window.location.hash = '/';
+
+  }
+}
 
 const logoutUser = () => {
   return async dispatch => {
@@ -214,9 +229,20 @@ const deleteProduct = deletedProduct => {
   };
 };
 
+const changeQuantity = (product) => {
+  return async dispatch => {
+    try {
+      await dispatch(_changeQuantity(product))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
+
 export {
   setProducts,
   setCategories,
@@ -226,3 +252,4 @@ export {
   addProduct,
   deleteProduct
 };
+

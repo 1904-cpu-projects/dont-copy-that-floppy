@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteProduct } from '../store';
+import { deleteProduct, changeQuantity } from '../store';
 
-const Cart = ({addedProduct, deleteProductFromCart}) => {
+const Cart = ({addedProduct, deleteProductFromCart, changeProductQuantity}) => {
   return (
     <div style={{
       display: 'flex',
@@ -38,8 +38,14 @@ const Cart = ({addedProduct, deleteProductFromCart}) => {
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text">{product.description}</p>
             <p className="card-text">{`$${product.price}`}</p>
-            <p className="card-text">Quantity: <button onClick={() => addedProduct.forEach(_product => {if (_product.id === product.id) {product.quantity = product.quantity -1}
-            })}> - </button>{product.quantity}<button onClick={() => addOne(product.id)}> + </button></p>
+            <p className="card-text">Quantity:
+            <select name='quantity' defaultValue={product.quantity} onChange={(event) => changeProductQuantity({newQuantity: event.target.value, productId: product.id})}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select></p>
             <Link to="/cart">
               <button onClick={() => deleteProductFromCart(product)}>Remove from Cart</button>
             </Link>
@@ -60,7 +66,8 @@ const mapStateToProps = ({ addedProduct }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteProductFromCart: event => {dispatch(deleteProduct(event))}
+    deleteProductFromCart: event => dispatch(deleteProduct(event)),
+    changeProductQuantity: event => dispatch(changeQuantity(event))
   }
 }
 
