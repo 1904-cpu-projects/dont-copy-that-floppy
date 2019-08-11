@@ -4,7 +4,7 @@ const Carousel = () => {
   return (
     <div
       id="carouselExampleIndicators"
-      class="carousel slide"
+      className="carousel slide"
       data-ride="carousel"
       style={{ display: 'flex', width: '50%', height: 500 }}
     >

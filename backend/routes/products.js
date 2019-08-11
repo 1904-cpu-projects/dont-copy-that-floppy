@@ -34,7 +34,15 @@ router.get('/category/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const newProduct = await Product.create({
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      brand: req.body.brand,
+      quantity: req.body.quantity,
+      description: req.body.description,
+      isAvailable: req.body.isAvailable
+    });
     res.status(201).send(newProduct);
   } catch (ex) {
     next(ex);

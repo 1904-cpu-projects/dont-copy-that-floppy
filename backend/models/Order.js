@@ -7,5 +7,13 @@ const Order = db.define('orders', {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4
   },
-  
+  items: {
+    type: Sequelize.STRING
+  },
 })
+
+Order.prototype.totalPrice = () => {
+ console.log(this)
+}
+
+ module.exports = Order

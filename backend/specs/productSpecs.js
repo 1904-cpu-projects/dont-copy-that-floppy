@@ -1,10 +1,8 @@
 const app =require('supertest')(require('../server'));
 const { expect } = require('chai');
-const { db } = require('../index');
 
-describe('Post Route', () => {
-  beforeEach(async () => await db.sync({ force: true }));
-  it('Should be able to Add New Products', async () => {
+describe('Post Route - PRODUCTS', () => {
+  it('Should be able to Add New Products', () => {
    return app.post('/api/products').send({
       name: 'Old Apple Product',
       price: 10.0,
