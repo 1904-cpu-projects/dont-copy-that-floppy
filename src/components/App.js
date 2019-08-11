@@ -8,7 +8,7 @@ import Cart from './Cart';
 import Login from './Login';
 import SignUp from './SignUp';
 import Checkout from './Checkout'
-import { setProducts, setCategories, loginUser } from '../store';
+import { setProducts, setCategories, loginUser, setCart } from '../store';
 import { connect } from 'react-redux';
 import SingleProduct from './SingleProduct';
 import OrderConfirmation from './OrderConfirmation'
@@ -18,6 +18,7 @@ class App extends React.Component {
     this.props.loadProducts();
     this.props.loadCategories();
     this.props.loadSession();
+    this.props.loadCart();
   }
 
   render() {
@@ -50,7 +51,8 @@ const mapDispatchToProps = dispatch => {
   return {
     loadProducts: () => dispatch(setProducts()),
     loadCategories: () => dispatch(setCategories()),
-    loadSession: () => dispatch(loginUser())
+    loadSession: () => dispatch(loginUser()),
+    loadCart: () => dispatch(setCart()),
   };
 };
 

@@ -10,8 +10,22 @@ router.post('/', async (req, res, next) => {
         id: req.body.id
       }
     });
+    if(!req.session.cart){
+    req.session.cart = [];
+    }
+    req.session.cart.push(product);
     res.send(product);
   } catch (ex) {
+    next(ex);
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try{
+    if(req.session.cart){
+      res.status(200).send(req.session.cart)
+    }
+  }catch(ex) {
     next(ex);
   }
 })

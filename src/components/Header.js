@@ -35,14 +35,14 @@ class Header extends React.Component {
       user,
       loggedInUser,
       handleLogout,
-      addedProduct
+      cart
     } = this.props;
 
     return (
       <div>
         <Link to="/">Home</Link>
         <Link to="/products">Products ({products.length})</Link>
-        <Link to="/cart">Cart ({addedProduct.length})</Link>
+        <Link to="/cart">Cart ({cart.length})</Link>
         <Link to="/login">
           {loggedInUser.email ? (
             <button onClick={() => handleLogout()}>
@@ -77,12 +77,12 @@ class Header extends React.Component {
   }
 }
 
-const mapStateToProps = ({ products, user, loggedInUser, addedProduct }) => {
+const mapStateToProps = ({ products, user, loggedInUser, cart }) => {
   return {
     products,
     user,
     loggedInUser,
-    addedProduct
+    cart,
   };
 };
 

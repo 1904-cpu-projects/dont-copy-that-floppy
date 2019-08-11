@@ -3,7 +3,8 @@ import { connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteProduct, changeQuantity } from '../store';
 
-const Cart = ({addedProduct, deleteProductFromCart, changeProductQuantity}) => {
+const Cart = ({cart, deleteProductFromCart, changeProductQuantity}) => {
+
   return (
     <div style={{
       display: 'flex',
@@ -18,7 +19,7 @@ const Cart = ({addedProduct, deleteProductFromCart, changeProductQuantity}) => {
         justifyContent: 'space-around',
         marginTop: '2em'
         }}>
-        {addedProduct.map(product =>
+        {cart.map(product =>
           <div key={product.id}
           className="card"
           style={{
@@ -58,9 +59,9 @@ const Cart = ({addedProduct, deleteProductFromCart, changeProductQuantity}) => {
 
 
 
-const mapStateToProps = ({ addedProduct }) => {
+const mapStateToProps = ({ cart }) => {
   return {
-    addedProduct,
+    cart,
   };
 };
 
