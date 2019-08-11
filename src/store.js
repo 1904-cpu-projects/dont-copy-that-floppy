@@ -250,6 +250,7 @@ export {
   createUser,
   logoutUser,
   addProduct,
-  deleteProduct
+  deleteProduct,
+  changeQuantity
 };
 
