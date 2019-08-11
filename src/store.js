@@ -21,7 +21,8 @@ const CATCH_ERROR = 'CATCH_ERROR';
 // Cart Actions
 const ADD_PRODUCT = "ADD_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
-const CHANGE_QUANTITY = "SUBTRACT_QUANTITY"
+const CHANGE_QUANTITY = "SUBTRACT_QUANTITY";
+const SET_CART = 'SET_CART';
 
 const productsReducer = (state = [], action) => {
   switch (action.type) {
@@ -68,6 +69,9 @@ const errorReducer = (state = '', action) => {
 
 const cartReducer = (state = [], action) => {
   switch (action.type) {
+    case SET_CART:
+      return action.cart;
+
     case ADD_PRODUCT:
       const alreadyAdded = state.forEach(product => {
         if (product.id === action.addedProduct.id) {
@@ -98,9 +102,7 @@ const reducer = combineReducers({
   loggedInUser: loginReducer,
   user: userReducer,
   error: errorReducer,
-  addedProduct: cartReducer,
-  deletedProduct: cartReducer,
-  changeQuantity: cartReducer
+  cart: cartReducer,
 });
 
 const _setProducts = products => {
@@ -124,7 +126,6 @@ const _loginUser = user => {
   }
 }
 
-
 const _logoutUser = () => {
   return {
     type: LOGOUT_USER
@@ -144,6 +145,13 @@ const _catchError = error => {
     error
   };
 };
+
+const _setCart = cart => {
+  return {
+    type: SET_CART,
+    cart
+  }
+}
 
 const _addProduct = addedProduct => {
   return {
@@ -208,6 +216,18 @@ const createUser = user => {
   };
 };
 
+const setCart = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get('/api/cart');
+      dispatch(_setCart(response.data));
+    }
+    catch (ex){
+      console.log(ex);
+    }
+  }
+}
+
 const addProduct = addedProduct => {
   return async dispatch => {
     try {
@@ -251,6 +271,7 @@ export {
   logoutUser,
   addProduct,
   deleteProduct,
-  changeQuantity
+  changeQuantity,
+  setCart
 };
 

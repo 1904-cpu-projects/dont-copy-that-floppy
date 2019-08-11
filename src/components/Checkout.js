@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Checkout = ({ addedProduct }) => {
+const Checkout = ({ cart }) => {
   let totalPrice = 0
-  addedProduct.forEach(product => totalPrice += product.price*product.quantity)
-  if (!addedProduct[0]) {
+  cart.forEach(product => totalPrice += product.price*product.quantity)
+  if (!cart[0]) {
     return (
       <div>
         You have no items in the cart.
@@ -21,7 +21,7 @@ const Checkout = ({ addedProduct }) => {
             <th>Quantity</th>
             <th>Price</th>
           </tr>
-          {addedProduct.map(product =>
+          {cart.map(product =>
             <tr>
               <td>{product.name}</td>
               <td>{product.quantity}</td>
@@ -68,9 +68,9 @@ const Checkout = ({ addedProduct }) => {
 
 
 
-const mapStateToProps = ({ addedProduct }) => {
+const mapStateToProps = ({ cart }) => {
   return {
-    addedProduct,
+    cart,
   };
 };
 
