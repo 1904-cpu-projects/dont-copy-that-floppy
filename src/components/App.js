@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import SingleProduct from './SingleProduct';
 import OrderConfirmation from './OrderConfirmation'
 import AdminCP from './AdminCP'
+import UserProfile from './UserProfile'
 
 class App extends React.Component {
   componentDidMount() {
@@ -45,6 +46,7 @@ class App extends React.Component {
         <Route path="/checkout" component={Checkout} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />
         {this.props.loggedInUser.isAdmin && <Route path="/admincp" component={AdminCP} />}
+        <Route path="/userprofile" component={UserProfile} />
       </HashRouter>
     );
   }
