@@ -3,13 +3,14 @@ const app = express();
 const path = require('path');
 const session = require('express-session');
 const cookie_parser = require('cookie-parser');
+const cors = require('cors');
 const passport = require('passport');
 const { models } = require('./index');
 const { User } = models;
 const saltHash = require('./utils');
 const distPath = path.join(__dirname, '../dist');
 const dotenv = require('dotenv');
-const seed = require('./seed')
+const seed = require('./seed');
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ if(process.env.SEED) {
 app.use(cookie_parser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use(
   session({
@@ -38,6 +40,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/google', require('./routes/oauth'));
+app.use('/stripe', require('./routes/stripe'));
 
 app.get('/', (req, res, next) => {
   if (req.user) {
