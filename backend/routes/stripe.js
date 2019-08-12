@@ -4,20 +4,10 @@ const bodyParser = require('body-parser');
 const { models } = require('../index')
 const { User, Order } = models
 
-const stripeKey = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 
 const stripe = require('stripe')(keySecret);
 const uuid = require('uuid/v4')
-
-
-router.get('/', async (req, res, next) => {
-  try{
-    res.send(stripeKey)
-  }catch(ex){
-    console.log(ex);
-  }
-})
 
 router.post('/checkout', async (req, res, next) => {
 
@@ -25,11 +15,7 @@ router.post('/checkout', async (req, res, next) => {
   let status;
 
   try{
-    console.log(req.body);
-
     const {token, product, total} = req.body;
-
-    console.log(token,product, total);
 
     const customer = await stripe.customers.create({
       email: token.email,

@@ -32,6 +32,7 @@ class Checkout extends React.Component {
     if(status === 'success'){
       toast('Success! Check email for details',
       { type: 'success'})
+      window.location.hash = '/orderconfirmation';
     }else{
       toast('Something went wrong', { type: 'error'});
     }
@@ -39,26 +40,53 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const {total} = this.state
+    const {total, product} = this.state
     const {handleToken} = this;
 
-    return (
+    if(!product[0]){
+      return (
+        <div>
+          You have no items in the cart.
+        </div>
+      )
+    }
+    else{
+      return (
+        <div>
+       <table>
+         <tbody>
+           <tr>
+             <th>Item</th>
+             <th>Quantity</th>
+             <th>Price</th>
+           </tr>
+           {product.map(product =>
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.quantity}</td>
+              <td>${product.price*product.quantity}</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+      <br />
+      <h5>Total: ${total}</h5>
+      <br />
       <div>
-        <StripeCheckout
-          token={handleToken}
-          billingAddress
-          shippingAddress
-          stripeKey='pk_test_P9Khr1QBteH9PBFoGaiRkfOw00RMsE4U5s'
-          amount = {total * 100}
-        />
-      </div>
-    )
+          <StripeCheckout
+            token={handleToken}
+            billingAddress
+            shippingAddress
+            stripeKey='pk_test_P9Khr1QBteH9PBFoGaiRkfOw00RMsE4U5s'
+            amount = {total * 100}
+          />
+        </div>
+    </div>
+      )
+    }
   }
 }
 
-// const Checkout = ({ cart }) => {
-//   let totalPrice = 0
-//   cart.forEach(product => totalPrice += product.price*product.quantity)
 //   if (!cart[0]) {
 //     return (
 //       <div>
