@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify'
 toast.configure();
@@ -11,17 +12,21 @@ class Checkout extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      product: this.props.cart
+      product: this.props.cart,
+      total: 0,
     }
     this.handleToken = this.handleToken.bind(this);
+
+    this.state.product.forEach(prod => this.state.total += prod.price*prod.quantity)
+
   }
 
   async handleToken(token){
+    const {total} = this.state;
+    const {product} = this.state
 
     const response = await axios.post('/stripe/checkout', {
-      token,
-      product
-    });
+      token, product, total});
 
     const { status } = response.data;
     if(status === 'success'){
@@ -34,11 +39,8 @@ class Checkout extends React.Component {
   }
 
   render() {
-    let totalPrice = 0
-    const {product} = this.state;
+    const {total} = this.state
     const {handleToken} = this;
-    product.forEach(product => totalPrice += product.price*product.quantity)
-
 
     return (
       <div>
@@ -46,9 +48,8 @@ class Checkout extends React.Component {
           token={handleToken}
           billingAddress
           shippingAddress
-          stripeKey={process.env.PUBLISHABLE_KEY}
-          amount = {totalPrice * 100}
-          name = {product.name}
+          stripeKey='pk_test_P9Khr1QBteH9PBFoGaiRkfOw00RMsE4U5s'
+          amount = {total * 100}
         />
       </div>
     )
