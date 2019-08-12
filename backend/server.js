@@ -73,6 +73,7 @@ app.post('/login', async (req, res, next) => {
       if (loginUser) {
         if (loginUser.password === saltHash(password)) {
           req.session.email = email;
+          const user = User
           res.status(201).send(req.session.email);
         } else {
           res.status(203).send('Unauthorized: Wrong Password');

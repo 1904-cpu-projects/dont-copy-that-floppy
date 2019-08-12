@@ -8,10 +8,11 @@ import Cart from './Cart';
 import Login from './Login';
 import SignUp from './SignUp';
 import Checkout from './Checkout'
-import { setProducts, setCategories, loginUser, setCart } from '../store';
+import { setProducts, setCategories, loginUser, setCart, getUsers } from '../store';
 import { connect } from 'react-redux';
 import SingleProduct from './SingleProduct';
 import OrderConfirmation from './OrderConfirmation'
+import AdminCP from './AdminCP'
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends React.Component {
     this.props.loadCategories();
     this.props.loadSession();
     this.props.loadCart();
+    this.props.loadUsers();
   }
 
   render() {
@@ -42,8 +44,15 @@ class App extends React.Component {
         <Route path="/signup" component={SignUp} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />
+        {this.props.loggedInUser.isAdmin && <Route path="/admincp" component={AdminCP} />}
       </HashRouter>
     );
+  }
+}
+
+const mapStateToProps = ({ loggedInUser }) => {
+  return {
+    loggedInUser
   }
 }
 
@@ -53,10 +62,11 @@ const mapDispatchToProps = dispatch => {
     loadCategories: () => dispatch(setCategories()),
     loadSession: () => dispatch(loginUser()),
     loadCart: () => dispatch(setCart()),
+    loadUsers: () => dispatch(getUsers())
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
