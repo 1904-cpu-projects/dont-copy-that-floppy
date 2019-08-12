@@ -54,6 +54,8 @@ class Header extends React.Component {
         </Link>
         <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>
 
+        {loggedInUser.isAdmin && <Link to='/admincp'>Admin Control Panel</Link>}
+
         <form onSubmit={handleSearch}>
           <input type="text" name="searchItem" />
           <button>Search</button>

@@ -24,6 +24,18 @@ const DELETE_PRODUCT = "DELETE_PRODUCT";
 const CHANGE_QUANTITY = "SUBTRACT_QUANTITY";
 const SET_CART = 'SET_CART';
 
+//Admin Actions
+const GET_ALL_USERS = 'GET_ALL_USERS'
+const REMOVE_USER = 'REMOVE_USER'
+
+const adminReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_ALL_USERS:
+      return [...state, action.users].flat();
+  }
+  return state
+}
+
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
@@ -103,7 +115,15 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   cart: cartReducer,
+  users: adminReducer
 });
+
+const _getUsers = users => {
+  return {
+    type: GET_ALL_USERS,
+    users
+  }
+}
 
 const _setProducts = products => {
   return {
@@ -259,6 +279,17 @@ const changeQuantity = (product) => {
   }
 }
 
+const getUsers = () => {
+  return async dispatch => {
+    try {
+    const response = await axios.get('/api/users')
+    dispatch(_getUsers(response.data))
+    } catch (ex) {
+    dispatch(_catchError(ex.response.data));
+    }
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
@@ -272,6 +303,7 @@ export {
   addProduct,
   deleteProduct,
   changeQuantity,
-  setCart
+  setCart,
+  getUsers
 };
 
