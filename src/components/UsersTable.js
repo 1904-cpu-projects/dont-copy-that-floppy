@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { deleteUser } from '../store';
 
-const UsersTable = ({ users }) => {
+const UsersTable = ({ users, removeUser }) => {
   return (
     <div>
       <table>
@@ -19,7 +20,9 @@ const UsersTable = ({ users }) => {
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button>Delete User</button>
+                  <button type="submit" onClick={() => removeUser(user.id)}>
+                    Delete User
+                  </button>
                 </td>
               </tr>
             );
@@ -36,4 +39,13 @@ const mapStateToProps = ({ users }) => {
   };
 };
 
-export default connect(mapStateToProps)(UsersTable);
+const mapDispatchToProps = dispatch => {
+  return {
+    removeUser: userId => dispatch(deleteUser(userId))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UsersTable);

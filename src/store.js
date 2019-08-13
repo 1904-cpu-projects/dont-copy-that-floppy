@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // Product Actions
 const SET_PRODUCTS = 'SET_PRODUCTS';
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 // Category Actions
 const SET_CATEGORIES = 'SET_CATEGORIES';
@@ -31,7 +32,11 @@ const REMOVE_USER = 'REMOVE_USER'
 const adminReducer = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_USERS:
-      return [...state, action.users].flat();
+      state = [...state, action.users].flat();
+      break;
+      case REMOVE_USER:
+      state = state.filter(user => user.id !== action.userId)
+      break;
   }
   return state
 }
@@ -39,7 +44,11 @@ const adminReducer = (state = [], action) => {
 const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
-      return [...state, action.products].flat();
+      state = [...state, action.products].flat();
+      break;
+    case REMOVE_PRODUCT:
+      state = state.filter(product => product.id !== action.productId)
+      break;
   }
   return state;
 };
@@ -125,12 +134,26 @@ const _getUsers = users => {
   }
 }
 
+const _deleteUser = userId => {
+  return {
+    type: REMOVE_USER,
+    userId
+  }
+}
+
 const _setProducts = products => {
   return {
     type: SET_PRODUCTS,
     products
   };
 };
+
+const _removeProduct = productId => {
+  return {
+    type: REMOVE_PRODUCT,
+    productId
+  }
+}
 
 const _setCategories = categories => {
   return {
@@ -200,6 +223,13 @@ const setProducts = () => {
     return dispatch(_setProducts(response.data));
   };
 };
+
+const removeProduct = productId => {
+  return async dispatch => {
+    await axios.delete(`/api/products/${productId}`)
+    return dispatch(_removeProduct(productId))
+  }
+}
 
 const setCategories = () => {
   return async dispatch => {
@@ -290,6 +320,13 @@ const getUsers = () => {
   }
 }
 
+const deleteUser = userId => {
+  return async dispatch => {
+    await axios.delete(`/api/users/${userId}`)
+    dispatch(_deleteUser(userId))
+  }
+}
+
 const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
@@ -304,6 +341,8 @@ export {
   deleteProduct,
   changeQuantity,
   setCart,
-  getUsers
+  getUsers,
+  deleteUser,
+  removeProduct
 };
 
