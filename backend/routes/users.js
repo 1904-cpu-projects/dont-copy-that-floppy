@@ -43,6 +43,20 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(204).send(req.params.id)
+  } catch (ex) {
+    next(ex)
+  }
+
+})
+
 router.get('/:id/orders', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
@@ -55,5 +69,7 @@ router.get('/:id/orders', async (req, res, next) => {
     next(ex)
   }
 })
+
+
 
 module.exports = router
