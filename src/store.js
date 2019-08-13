@@ -24,6 +24,7 @@ const ADD_PRODUCT = "ADD_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
 const CHANGE_QUANTITY = "SUBTRACT_QUANTITY";
 const SET_CART = 'SET_CART';
+const DELETE_CART = 'DELETE_CART'
 
 //Admin Actions
 const GET_ALL_USERS = 'GET_ALL_USERS'
@@ -92,7 +93,9 @@ const cartReducer = (state = [], action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
-
+    case DELETE_CART:
+      state = []
+      return state;
     case ADD_PRODUCT:
       const alreadyAdded = state.forEach(product => {
         if (product.id === action.addedProduct.id) {
@@ -217,6 +220,13 @@ const _changeQuantity = (product) => {
   }
 }
 
+const _deleteCart = (products) => {
+  return {
+    type: DELETE_CART,
+    products
+  }
+}
+
 const setProducts = () => {
   return async dispatch => {
     const response = await axios.get('/api/products');
@@ -320,10 +330,19 @@ const getUsers = () => {
   }
 }
 
+
 const deleteUser = userId => {
   return async dispatch => {
     await axios.delete(`/api/users/${userId}`)
     dispatch(_deleteUser(userId))
+
+const deleteCart = () => {
+  return async dispatch => {
+    try {
+      dispatch(_deleteCart())
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
@@ -343,6 +362,7 @@ export {
   setCart,
   getUsers,
   deleteUser,
-  removeProduct
+  removeProduct,
+  deleteCart
 };
 

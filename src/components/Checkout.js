@@ -39,6 +39,7 @@ class Checkout extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const {total, product} = this.state
     const {handleToken} = this;
 
