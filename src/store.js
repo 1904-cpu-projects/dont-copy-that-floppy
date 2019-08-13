@@ -335,6 +335,8 @@ const deleteUser = userId => {
   return async dispatch => {
     await axios.delete(`/api/users/${userId}`)
     dispatch(_deleteUser(userId))
+  }
+}
 
 const deleteCart = () => {
   return async dispatch => {
