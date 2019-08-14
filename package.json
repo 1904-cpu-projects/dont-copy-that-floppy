@@ -9,7 +9,6 @@
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./backend/app.js --ignore dist --ignore src",
     "start": "node ./backend/app.js",
-    "seed": "node ./backend/seed.js",
     "test": "mocha ./backend/specs --recursive --watch"
   },
   "repository": {
