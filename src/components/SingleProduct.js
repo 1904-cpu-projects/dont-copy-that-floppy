@@ -3,7 +3,17 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addProduct } from '../store';
 
-const SingleProduct = ({ product, addProductToCart }) => {
+const SingleProduct = ({ product, addProductToCart, cart }) => {
+  function alreadyinCart(productId) {
+    let alreadyinCart = false;
+    cart.forEach(item => {
+      if (item.id === productId) {
+        alreadyinCart = true;
+      }
+    })
+    return alreadyinCart
+  }
+
   return (
     <div
       className="card"
@@ -31,29 +41,27 @@ const SingleProduct = ({ product, addProductToCart }) => {
         </h5>
         <p className="card-text">{product.description}</p>
         <p className="card-text">{`$${product.price}`}</p>
-        <p>
-          <small>
-            {product.isAvailable
-              ? `In Stock. ${product.quantity} available.`
-              : 'Out of stock.'}
-          </small>
-        </p>
+        <small>{alreadyinCart(product.id) ? 'Already added to the cart.': 'In stock.'}</small>
         <Link>
-          <button
-            className="btn btn-primary mt-auto"
-            onClick={() => addProductToCart(product)}
-          >
-            Add to Cart
-          </button>
+          <div>
+            <button
+              disabled={alreadyinCart(product.id) ? true: false}
+              className="btn btn-primary mt-auto"
+              onClick={() => addProductToCart(product)}
+            >
+              Add to Cart
+            </button>
+          </div>
         </Link>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ addedProduct }) => {
+const mapStateToProps = ({ addedProduct, cart }) => {
   return {
-    addedProduct
+    addedProduct,
+    cart
   };
 };
 
