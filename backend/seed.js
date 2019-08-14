@@ -34,6 +34,13 @@ const seed = async () => {
         return Product.create({ ...vg, categoryId: videoGames.id });
       })
     );
+    await User.create({
+      firstName: 'admin',
+      lastName: 'floppy',
+      email: 'admin@floppy.com',
+      password: 'floppyadmin',
+      isAdmin: true
+    });
   } catch (ex) {
     console.log(ex);
   }
