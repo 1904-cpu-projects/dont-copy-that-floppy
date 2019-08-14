@@ -54,7 +54,19 @@ router.delete('/:id', async (req, res, next) => {
   } catch (ex) {
     next(ex)
   }
+})
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updatedUser = await User.update({
+      isAdmin: req.body.isAdmin,
+    where: {
+      id: req.params.id
+    }})
+    res.send(updatedUser)
+  } catch (ex) {
+    next (ex)
+  }
 })
 
 router.get('/:id/orders', async (req, res, next) => {

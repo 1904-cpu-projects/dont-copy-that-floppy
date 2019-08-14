@@ -48,9 +48,15 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const updatedProduct = await Product.update(req.body, {
+    const updatedProduct = await Product.update({
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      brand: req.body.brand,
+      quantity: req.body.quantity,
+      description: req.body.description}, {
       where: {
         id: req.params.id
       }
