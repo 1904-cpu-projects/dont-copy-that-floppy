@@ -30,5 +30,23 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.delete('/', async (req, res, next) => {
+  try{
+    delete req.session.cart;
+    res.sendStatus(204);
+  }catch(ex){
+    next(ex);
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try{
+    req.session.cart = req.session.cart.filter((item) => (item.id !== req.params.id));
+    res.sendStatus(204);
+  }catch(ex){
+    next(ex);
+  }
+})
+
 
 module.exports = router

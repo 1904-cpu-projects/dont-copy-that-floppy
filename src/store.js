@@ -302,7 +302,8 @@ const addProduct = addedProduct => {
 const deleteProduct = deletedProduct => {
   return async dispatch => {
     try {
-      await dispatch(_deleteProduct(deletedProduct));
+      await axios.delete(`/api/cart/${deletedProduct.id}`)
+      dispatch(_deleteProduct(deletedProduct));
     } catch (err) {
       console.error(err);
     }
@@ -341,6 +342,7 @@ const deleteUser = userId => {
 const deleteCart = () => {
   return async dispatch => {
     try {
+      await axios.delete('/api/cart');
       dispatch(_deleteCart())
     } catch (err) {
       console.error(err)
