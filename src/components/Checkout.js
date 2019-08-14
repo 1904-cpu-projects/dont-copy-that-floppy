@@ -57,13 +57,11 @@ class Checkout extends React.Component {
           <tbody>
             <tr>
               <th>Item</th>
-              <th>Quantity</th>
               <th>Price</th>
             </tr>
             {product.map(product =>
               <tr key={product.id}>
                 <td>{product.name}</td>
-                <td>{product.quantity}</td>
                 <td>${product.price*product.quantity}</td>
               </tr>
             )}
