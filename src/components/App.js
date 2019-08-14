@@ -23,7 +23,6 @@ class App extends React.Component {
     this.props.loadSession();
     this.props.loadCart();
     this.props.loadUsers();
-    this.props.emptyCart();
   }
 
   render() {
@@ -68,7 +67,6 @@ const mapDispatchToProps = dispatch => {
     loadSession: () => dispatch(loginUser()),
     loadCart: () => dispatch(setCart()),
     loadUsers: () => dispatch(getUsers()),
-    emptyCart: () => dispatch(deleteCart())
   };
 };
 
