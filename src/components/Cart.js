@@ -39,14 +39,6 @@ const Cart = ({cart, deleteProductFromCart, changeProductQuantity}) => {
             <h5 className="card-title">{product.name}</h5>
             <p className="card-text">{product.description}</p>
             <p className="card-text">{`$${product.price}`}</p>
-            <p className="card-text">Quantity:
-            <select name='quantity' defaultValue={product.quantity} onChange={(event) => changeProductQuantity({newQuantity: event.target.value, productId: product.id})}>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select></p>
             <Link to="/cart">
               <button onClick={() => deleteProductFromCart(product)}>Remove from Cart</button>
             </Link>
