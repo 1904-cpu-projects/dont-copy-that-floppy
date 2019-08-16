@@ -26,13 +26,19 @@ describe('Order Specs', () => {
           name: 'Old Apple Product',
           price: 10.0,
           quantity: 6
-        }]),
+        },
+        {
+          name: 'New Apple Product',
+          price: 100.0,
+          quantity: 6
+        }
+      ]),
       })
       return app.get(`/api/users/${user.id}/orders`)
       .expect(200)
       .then(res => {
         const items = res.body.map(b => JSON.parse(b.items))
-        expect(items.length).to.equal(1)
+        expect(items[0].length).to.equal(2)
       })
 
       })

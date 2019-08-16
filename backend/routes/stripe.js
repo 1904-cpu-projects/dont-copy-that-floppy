@@ -17,7 +17,10 @@ router.post('/checkout', async (req, res, next) => {
   try{
     const {token, product, total} = req.body;
 
-    const items = product.map(item => item.name);
+    const items = product.map(item => ({
+      name: item.name,
+      price: item.price,
+      quantity: 1}));
 
     const user = await User.findOne({
       where: {
@@ -27,13 +30,13 @@ router.post('/checkout', async (req, res, next) => {
 
     if(user){
       await Order.create({
-        items: items,
+        items: JSON.stringify(items),
         userId: user.id,
       })
     }
     else{
       await Order.create({
-        items: items
+        items: JSON.stringify(items)
       })
     }
 
