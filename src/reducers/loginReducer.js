@@ -1,3 +1,4 @@
+import axios from 'axios'
 // Login Actions
 const LOGIN_USER = 'LOGIN_USER';
 const LOGOUT_USER = 'LOGOUT_USER';

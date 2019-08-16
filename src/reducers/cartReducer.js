@@ -1,3 +1,4 @@
+import axios from 'axios'
 // Cart Actions
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';

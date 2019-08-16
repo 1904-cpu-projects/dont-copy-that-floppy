@@ -1,4 +1,5 @@
 import { _catchError } from './errorReducer'
+import axios from 'axios'
 // User Actions
 const CREATE_USER = 'CREATE_USER';
 

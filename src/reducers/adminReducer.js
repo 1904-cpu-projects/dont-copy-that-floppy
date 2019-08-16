@@ -1,3 +1,4 @@
+import axios from 'axios'
 //Admin Actions
 const GET_ALL_USERS = 'GET_ALL_USERS';
 const REMOVE_USER = 'REMOVE_USER';

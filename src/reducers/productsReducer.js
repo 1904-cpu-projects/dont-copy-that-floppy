@@ -1,3 +1,4 @@
+import axios from 'axios'
 // Product Actions
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';

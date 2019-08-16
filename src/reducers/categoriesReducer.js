@@ -1,3 +1,4 @@
+import axios from 'axios'
 // Category Actions
 const SET_CATEGORIES = 'SET_CATEGORIES';
 
