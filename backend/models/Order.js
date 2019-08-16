@@ -8,7 +8,7 @@ const Order = db.define('orders', {
     defaultValue: Sequelize.UUIDV4
   },
   items: {
-    type: Sequelize.STRING
+    type: Sequelize.ARRAY(Sequelize.TEXT)
   },
 })
 
