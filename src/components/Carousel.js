@@ -6,7 +6,7 @@ const Carousel = () => {
       id="carouselExampleIndicators"
       className="carousel slide"
       data-ride="carousel"
-      style={{ display: 'flex', width: '50%', height: 500 }}
+      style={{ display: 'flex', width: '50%' }}
     >
       <ol className="carousel-indicators">
         <li
