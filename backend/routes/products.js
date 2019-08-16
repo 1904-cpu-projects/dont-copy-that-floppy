@@ -34,16 +34,29 @@ router.get('/category/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const newProduct = await Product.create({
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      brand: req.body.brand,
+      quantity: req.body.quantity,
+      description: req.body.description,
+    });
     res.status(201).send(newProduct);
   } catch (ex) {
     next(ex);
   }
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const updatedProduct = await Product.update(req.body, {
+    const updatedProduct = await Product.update({
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+      brand: req.body.brand,
+      quantity: req.body.quantity,
+      description: req.body.description}, {
       where: {
         id: req.params.id
       }

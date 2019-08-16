@@ -1,76 +1,93 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import StripeCheckout from 'react-stripe-checkout';
+import { toast } from 'react-toastify'
+toast.configure();
 
-const Checkout = ({ addedProduct }) => {
-  let totalPrice = 0
-  addedProduct.forEach(product => totalPrice += product.price*product.quantity)
-  if (!addedProduct[0]) {
-    return (
-      <div>
-        You have no items in the cart.
-      </div>
-    )
+
+class Checkout extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      product: this.props.cart,
+      total: 0,
+    }
+    this.handleToken = this.handleToken.bind(this);
+
+    this.state.product.forEach(prod => this.state.total += prod.price*prod.quantity)
+
   }
-  return (
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-          {addedProduct.map(product =>
+
+  async handleToken(token){
+    const {total} = this.state;
+    const {product} = this.state
+
+    const response = await axios.post('/stripe/checkout', {
+      token, product, total});
+
+    const { status } = response.data;
+    if(status === 'success'){
+      toast('Success! Check email for details',
+      { type: 'success'})
+      window.location.hash = '/orderconfirmation';
+    }else{
+      toast('Something went wrong', { type: 'error'});
+    }
+
+  }
+
+  render() {
+    console.log(this.props)
+    const {total, product} = this.state
+    const {handleToken} = this;
+
+    if(!product[0]){
+      return (
+        <div>
+          You have no items in the cart.
+        </div>
+      )
+    }
+    else{
+      return (
+        <div>
+        <table>
+          <tbody>
             <tr>
-              <td>{product.name}</td>
-              <td>{product.quantity}</td>
-              <td>${product.price*product.quantity}</td>
+              <th>Item</th>
+              <th>Price</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-      <br />
-      <h5>Total: ${totalPrice}</h5>
-      <br />
-      <h5>Shipping Information</h5>
-      <form>
-        <label>
-          Address 1
-          <input type='text' />
-        </label>
+            {product.map(product =>
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>${product.price*product.quantity}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
         <br />
-        <label>
-          Address 2
-          <input type='text' />
-        </label>
+        <h5>Total: ${total}</h5>
         <br />
-        <label>
-          City
-          <input type='text' />
-        </label>
-        <br />
-        <label>
-          State
-          <input type='text' />
-        </label>
-        <br />
-        <label>
-          Zip Code
-          <input type='text' />
-        </label>
-        <br />
-      </form>
-      <button>Place Order</button>
+        <div>
+            <StripeCheckout
+              token={handleToken}
+              billingAddress
+              shippingAddress
+              stripeKey='pk_test_P9Khr1QBteH9PBFoGaiRkfOw00RMsE4U5s'
+              amount = {total * 100}
+            />
+        </div>
     </div>
-  );
+      )
+    }
+  }
 }
 
-
-
-const mapStateToProps = ({ addedProduct }) => {
+const mapStateToProps = ({ cart }) => {
   return {
-    addedProduct,
+    cart,
   };
 };
 

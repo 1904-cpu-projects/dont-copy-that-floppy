@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { models } = require('../index')
-const { User } = models
+const { User, Order } = models
 
 router.get('/', async (req, res, next) => {
   try{
@@ -18,24 +18,70 @@ router.post('/', async (req, res, next) => {
         email: req.body.email
       }
     }))){
-      const user = await User.create(req.body);
-      res.send(user);
+      const user = await User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password
+      });
+      res.status(201).send(user);
     }else{
       res.status(401).send("Account Already Exists")
     }
 })
 
-router.get('/:id/orders', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.params.id
+         id: req.params.id
       }
-      })
-    res.send(user.orders)
+    })
+    res.send(user)
   } catch (ex) {
     next(ex)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(204).send(req.params.id)
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const updatedUser = await User.update({
+      isAdmin: req.body.isAdmin,
+    where: {
+      id: req.params.id
+    }})
+    res.send(updatedUser)
+  } catch (ex) {
+    next (ex)
+  }
+})
+
+router.get('/:id/orders', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.id
+      }
+      })
+    res.send(orders)
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+
 
 module.exports = router

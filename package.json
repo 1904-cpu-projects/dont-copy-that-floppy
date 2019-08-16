@@ -9,8 +9,8 @@
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start:dev": "npm run webpack:dev & nodemon ./backend/app.js --ignore dist --ignore src",
     "start": "node ./backend/app.js",
-    "seed": "node ./backend/seed.js",
-    "test": "mocha ./backend/specs/orderSpec.js --watch"
+    "test:dev": "mocha ./backend/specs --recursive --watch",
+    "test": "mocha ./backend/specs --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -41,28 +41,32 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "react-toastify": "^5.3.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6",
-    "chai": "^4.2.0",
-    "mocha": "^6.2.0",
-    "supertest": "^4.0.2"
+    "webpack-cli": "^3.3.6"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^7.12.0",
+    "react-stripe-checkout": "^2.6.3",
+    "stripe": "^7.7.0",
     "sequelize": "^5.12.2"
   }
 }

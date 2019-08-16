@@ -1,15 +1,16 @@
 const app = require('supertest')(require('../server'));
 const { expect } = require('chai');
 const { db, models } = require('../index');
-const { User } = models;
+const { User, Order } = models;
 
 describe('Order Specs', () => {
   beforeEach(async () => {
-    await db.sync({ force: true });
+    await db.sync({force: true})
     await User.create({
       firstName: 'Test',
       lastName: 'Spec',
-      email: 'test@spec.com'
+      email: 'test@spec.com',
+      password: 'test'
     });
   });
   describe('Get All Orders', () => {
@@ -19,11 +20,21 @@ describe('Order Specs', () => {
           email: 'test@spec.com'
         }
       });
+      await Order.create({
+        userId: user.id,
+        items: JSON.stringify([{
+          name: 'Old Apple Product',
+          price: 10.0,
+          quantity: 6
+        }]),
+      })
       return app.get(`/api/users/${user.id}/orders`)
       .expect(200)
       .then(res => {
-        expect(Array.isArray(res.body)).to.equal(true)
+        const items = res.body.map(b => JSON.parse(b.items))
+        expect(items.length).to.equal(1)
+      })
+
       })
     });
   });
-});
