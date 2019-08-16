@@ -16,27 +16,21 @@ class Header extends React.Component {
 
   handleSearch(ev) {
     event.preventDefault();
-    this.setState({searchItem: ev.target.searchItem.value});
+    this.setState({ searchItem: ev.target.searchItem.value });
     this.props.history.push(`/products/search/${this.state.searchItem}`);
     ev.target.searchItem.value = '';
   }
 
   reset(ev) {
     event.preventDefault();
-    this.setState({searchItem: ''}) ;
+    this.setState({ searchItem: '' });
     this.props.history.push(`/products`);
   }
 
   render() {
     const { searchItem } = this.state;
     const { handleSearch, reset } = this;
-    const {
-      products,
-      user,
-      loggedInUser,
-      handleLogout,
-      cart
-    } = this.props;
+    const { products, user, loggedInUser, handleLogout, cart } = this.props;
 
     return (
       <header className="section-header">
@@ -45,7 +39,8 @@ class Header extends React.Component {
             <div className="row align-items-center">
               <div className="col-lg-3 col-sm-4">
                 <div className="brand-wrap">
-                  <img className="logo"
+                  <img
+                    className="logo"
                     style={{ width: 100, height: 100 }}
                     src="https://i.imgur.com/BOdXYeP.png"
                   />
@@ -62,11 +57,14 @@ class Header extends React.Component {
             </div>
             <div className="col-lg-5 col-xl-4 col-sm-12">
               <div className="">
-                <Link to="/">Home</Link>
-                <Link to="/products">Products ({products.length})</Link>
-                <Link to="/cart">Cart ({cart.length})</Link>
-                <Link to="/userprofile">{loggedInUser.email ? 'My Profile' : ''}</Link>
+                <Link to="/">Home</Link>{' '}
+                <Link to="/products">Products({products.length})</Link>{' '}
+                <Link to="/cart">Cart({cart.length})</Link>{' '}
+                <Link to="/userprofile">
+                  {loggedInUser.email ? 'My Profile' : ''}
+                </Link>{' '}
                 <Link to="/login">
+                  {' '}
                   {loggedInUser.email ? (
                     <button onClick={() => handleLogout()}>
                       Logout {loggedInUser.email}
@@ -74,25 +72,27 @@ class Header extends React.Component {
                   ) : (
                     `Login`
                   )}
-                </Link>
-                <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>
-
-                {loggedInUser.isAdmin && <Link to='/admincp'>Admin Control Panel</Link>}
+                </Link>{' '}
+                <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
+                {loggedInUser.isAdmin && (
+                  <Link to="/admincp">Admin Control Panel</Link>
+                )}
               </div>
             </div>
             <div id="floppy-search-items">
               {products.filter(
-                  product => product.name.toLowerCase() === searchItem.toLowerCase()
-                ).length !== 0
-                  ? products
-                      .filter(
-                        product =>
-                          product.name.toLowerCase() === searchItem.toLowerCase()
-                      )
-                      .map(product => (
-                        <SingleProduct product={product} key={product.id} />
-                      ))
-                  : ''}
+                product =>
+                  product.name.toLowerCase() === searchItem.toLowerCase()
+              ).length !== 0
+                ? products
+                    .filter(
+                      product =>
+                        product.name.toLowerCase() === searchItem.toLowerCase()
+                    )
+                    .map(product => (
+                      <SingleProduct product={product} key={product.id} />
+                    ))
+                : ''}
             </div>
           </div>
         </section>
@@ -106,7 +106,7 @@ const mapStateToProps = ({ products, user, loggedInUser, cart }) => {
     products,
     user,
     loggedInUser,
-    cart,
+    cart
   };
 };
 
