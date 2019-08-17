@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 import {
   productsReducer,
   removeProduct,
-  setProducts
+  setProducts,
+  editProduct
 } from './reducers/productsReducer';
 import { setCategories, categoriesReducer } from './reducers/categoriesReducer';
 import { loginUser, logoutUser, loginReducer } from './reducers/loginReducer';
@@ -19,6 +19,7 @@ import {
   cartReducer
 } from './reducers/cartReducer';
 import { getUsers, deleteUser, adminReducer } from './reducers/adminReducer'
+import { getOrders, orderReducer } from './reducers/orderReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -27,7 +28,8 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   cart: cartReducer,
-  users: adminReducer
+  users: adminReducer,
+  orders: orderReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -47,5 +49,7 @@ export {
   getUsers,
   deleteUser,
   removeProduct,
-  deleteCart
+  deleteCart,
+  editProduct,
+  getOrders,
 };

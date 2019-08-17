@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeProduct } from '../store';
+import { Link } from 'react-router-dom'
 
 const ProductsTable = ({ products, deleteProduct }) => {
   return (
     <div>
+      <form>
       <table>
         <tbody>
           <tr>
@@ -14,7 +16,7 @@ const ProductsTable = ({ products, deleteProduct }) => {
             <th>Brand</th>
             <th>Description</th>
             <th>Quantity</th>
-            <th>Is Available</th>
+            <th>Edit Product</th>
             <th>Delete Product</th>
           </tr>
           {products.map(product => {
@@ -26,7 +28,9 @@ const ProductsTable = ({ products, deleteProduct }) => {
                 <td>{product.brand}</td>
                 <td>{product.description}</td>
                 <td>{product.quantity}</td>
-                <td>{product.isAvailable}</td>
+                <td>
+                  <Link to={`/admincp/products/${product.id}`}>Edit Product </Link>
+                </td>
                 <td>
                   <button type="submit" onClick={() => deleteProduct(product.id)}>
                     Delete Product
@@ -37,6 +41,7 @@ const ProductsTable = ({ products, deleteProduct }) => {
           })}
         </tbody>
       </table>
+      </form>
     </div>
   );
 };
