@@ -22,6 +22,10 @@ class EditProfile extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     await axios.put(`/api/users/${this.props.loggedInUser.id}`, this.state);
+    this.props.loggedInUser.firstName = this.state.firstName;
+    this.props.loggedInUser.lastName = this.state.lastName;
+    this.props.loggedInUser.email = this.state.email;
+    window.location.hash = '/userprofile'
   }
 
   render () {
