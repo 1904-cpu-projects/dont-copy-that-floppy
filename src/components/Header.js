@@ -84,6 +84,7 @@ class Header extends React.Component {
                     )}
                   </Link>{' '}
                   <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
+                  {loggedInUser.email && (<Link to="/users/:id/orders">Order History</Link>)}
                   {loggedInUser.isAdmin && (
                     <Link to="/admincp">Admin Control Panel</Link>
                   )}
