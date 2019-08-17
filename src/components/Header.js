@@ -36,6 +36,28 @@ class Header extends React.Component {
       <header className="section-header">
         <nav className="navbar navbar-top navbar-expand-lg navbar-dark bg-secondary">
           <div className="container">
+            <button className="navbar-toggler" type="button">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarsExample07">
+              <ul className="navbar-nav mr-auto">
+              </ul>
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a href="https://www.google.com/search?q=what+are+vintage+electronics???" target="_blank" className="nav-link">Help</a>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Language</a>
+                  <ul className="dropdown-menu dropdown-menu-right">
+                    <li>
+                      <a href="/#" className="dropdown-item">
+                        English
+                    </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
         <section className="header-main shadow-sm">
@@ -54,7 +76,7 @@ class Header extends React.Component {
               <div className="col-lg-4 col-xl-5 col-sm-8">
                 <form onSubmit={handleSearch} className="search-wrap">
                   <div className="input-group w-100">
-                    <input type="text" name="searchItem" className="form-control" style={{width: 55}} placeholder="Search"/>
+                    <input type="text" name="searchItem" className="form-control" style={{ width: 55 }} placeholder="Search" />
                     <div className="input-group-append">
                       <button className="btn btn-primary">
                         Go
@@ -68,7 +90,6 @@ class Header extends React.Component {
               <div className="col-lg-5 col-xl-4 col-sm-12">
                 <div className="">
                   <Link to="/">Home</Link>{' '}
-                  <Link to="/products">Products({products.length})</Link>{' '}
                   <Link to="/cart">Cart({cart.length})</Link>{' '}
                   <Link to="/userprofile">
                     {loggedInUser.email ? 'My Profile' : ''}
@@ -80,8 +101,8 @@ class Header extends React.Component {
                         Logout {loggedInUser.email}
                       </button>
                     ) : (
-                      `Login`
-                    )}
+                        `Login`
+                      )}
                   </Link>{' '}
                   <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
                   {loggedInUser.email && (<Link to="/users/:id/orders">Order History</Link>)}
@@ -97,13 +118,13 @@ class Header extends React.Component {
                   product.name.toLowerCase() === searchItem.toLowerCase()
               ).length !== 0
                 ? products
-                    .filter(
-                      product =>
-                        product.name.toLowerCase() === searchItem.toLowerCase()
-                    )
-                    .map(product => (
-                      <SingleProduct product={product} key={product.id} />
-                    ))
+                  .filter(
+                    product =>
+                      product.name.toLowerCase() === searchItem.toLowerCase()
+                  )
+                  .map(product => (
+                    <SingleProduct product={product} key={product.id} />
+                  ))
                 : ''}
             </div>
           </div>
@@ -124,7 +145,7 @@ const mapStateToProps = ({ products, user, loggedInUser, cart }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleLogout: function(ev) {
+    handleLogout: function (ev) {
       event.preventDefault();
 
       dispatch(logoutUser());

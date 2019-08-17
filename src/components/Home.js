@@ -3,13 +3,17 @@ import { connect } from 'react-redux';
 
 const Home = ({ loggedInUser }) => {
   return (
-    <div>
-      <div>
-        Welcome!{' '}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column'}}>
+      <h2>
+        Welcome,{' '}
         {loggedInUser.email
           ? `${loggedInUser.firstName} ${loggedInUser.lastName}`
-          : ''}
-      </div>
+          : ''}!
+      </h2>
     </div>
   );
 };
