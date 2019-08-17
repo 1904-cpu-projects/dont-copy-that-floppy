@@ -7,8 +7,8 @@ const Products = props => {
   const style = {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    marginTop: '2em'
+    justifyContent: 'space-around'
+    // marginTop: '2em'
   };
   return (
     <div className="container" style={{ ...style, margin: 'auto' }}>
@@ -28,12 +28,11 @@ const Products = props => {
 };
 
 const mapStateToProps = ({ products }, ownProps) => {
-  const { id } = ownProps.match.params;
+  const { id } = ownProps.match ? ownProps.match.params : '';
   return {
     products,
     id
   };
 };
-
 
 export default connect(mapStateToProps)(Products);
