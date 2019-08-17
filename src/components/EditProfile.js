@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class EditProfile extends React.Component {
   constructor (props) {
@@ -20,7 +21,11 @@ class EditProfile extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state)
+    await axios.put(`/api/users/${this.props.loggedInUser.id}`, this.state);
+    this.props.loggedInUser.firstName = this.state.firstName;
+    this.props.loggedInUser.lastName = this.state.lastName;
+    this.props.loggedInUser.email = this.state.email;
+    window.location.hash = '/userprofile'
   }
 
   render () {
