@@ -50,7 +50,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/login', async (req, res, next) => {
-  try {
+  try{
     if (req.session.email) {
       const user = await User.findOne({
         where: {
@@ -59,7 +59,11 @@ app.get('/login', async (req, res, next) => {
       })
       res.send(user);
     }
-  } catch (ex) {
+    else{
+      res.redirect('/');
+    }
+  }
+  catch(ex){
     next(ex);
   }
 });

@@ -17,6 +17,29 @@ router.post('/checkout', async (req, res, next) => {
   try{
     const {token, product, total} = req.body;
 
+    const items = product.map(item => ({
+      name: item.name,
+      price: item.price,
+      quantity: 1}));
+
+    const user = await User.findOne({
+      where: {
+        email: token.email
+      }
+    })
+
+    if(user){
+      await Order.create({
+        items: JSON.stringify(items),
+        userId: user.id,
+      })
+    }
+    else{
+      await Order.create({
+        items: JSON.stringify(items)
+      })
+    }
+
     const customer = await stripe.customers.create({
       email: token.email,
       source: token.id
