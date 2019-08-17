@@ -18,7 +18,12 @@ const _removeProduct = productId => {
   };
 };
 
-const _editProduct = product
+const _editProduct = product => {
+  return {
+    type: EDIT_PRODUCT,
+    product
+}
+}
 
 export const setProducts = () => {
   return async dispatch => {
@@ -34,6 +39,14 @@ export const removeProduct = productId => {
   };
 };
 
+export const editProduct = (productId,product) => {
+  return async dispatch => {
+    const res = await axios.put(`/api/products/${productId}`, product)
+    return dispatch(_editProduct(res.data))
+  }
+
+}
+
 export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case SET_PRODUCTS:
@@ -41,6 +54,14 @@ export const productsReducer = (state = [], action) => {
       break;
     case REMOVE_PRODUCT:
       state = state.filter(product => product.id !== action.productId);
+      break;
+    case EDIT_PRODUCT:
+      state = [...state].map(_product => {
+        if(_product.id !== action.product.id) {
+          return _product
+        }
+        return action.product
+      })
       break;
   }
   return state;
