@@ -2,6 +2,7 @@ import axios from 'axios'
 // Product Actions
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 const _setProducts = products => {
   return {
@@ -16,6 +17,8 @@ const _removeProduct = productId => {
     productId
   };
 };
+
+const _editProduct = product
 
 export const setProducts = () => {
   return async dispatch => {
