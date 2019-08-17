@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 import {
   productsReducer,
   removeProduct,
-  setProducts
+  setProducts,
+  editProduct
 } from './reducers/productsReducer';
 import { setCategories, categoriesReducer } from './reducers/categoriesReducer';
 import { loginUser, logoutUser, loginReducer } from './reducers/loginReducer';
@@ -50,5 +50,6 @@ export {
   deleteUser,
   removeProduct,
   deleteCart,
+  editProduct,
   getOrders,
 };

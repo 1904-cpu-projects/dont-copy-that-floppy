@@ -39,11 +39,6 @@ const Product = db.define('products', {
     validate: {
       min: 0
     }
-  },
-  // maybe this could be a function isAvailable returns true if quantity > 0
-  isAvailable: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: true
   }
 });
 
