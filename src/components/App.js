@@ -3,11 +3,8 @@ import { HashRouter, Route, Link } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import Sidebar from './Sidebar';
-import Products from './Products';
-import Cart from './Cart';
 import Login from './Login';
 import SignUp from './SignUp';
-import Checkout from './Checkout';
 import {
   setProducts,
   setCategories,
@@ -17,7 +14,6 @@ import {
   deleteCart
 } from '../store';
 import { connect } from 'react-redux';
-import SingleProduct from './SingleProduct';
 import OrderConfirmation from './OrderConfirmation';
 import AdminCP from './AdminCP';
 import UserProfile from './UserProfile';
