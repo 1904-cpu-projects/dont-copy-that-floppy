@@ -1,19 +1,22 @@
 import React from 'react';
-import Carousel from './Carousel';
 import { connect } from 'react-redux';
 
 const Home = ({ loggedInUser }) => {
   return (
     <div>
-      <div>Welcome! {loggedInUser.email ? `${loggedInUser.firstName} ${loggedInUser.lastName}` : ''}</div>
-      <Carousel />
+      <div>
+        Welcome!{' '}
+        {loggedInUser.email
+          ? `${loggedInUser.firstName} ${loggedInUser.lastName}`
+          : ''}
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = ({ loggedInUser }) => {
   return {
-    loggedInUser,
+    loggedInUser
   };
 };
 
