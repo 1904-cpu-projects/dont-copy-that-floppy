@@ -18,6 +18,7 @@ import OrderConfirmation from './OrderConfirmation';
 import AdminCP from './AdminCP';
 import UserProfile from './UserProfile';
 import EditProfile from './EditProfile';
+import OrderHistory from './OrderHistory';
 
 class App extends React.Component {
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends React.Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />
+        <Route path = "/users/:id/orders" component={OrderHistory}/>
         {this.props.loggedInUser.isAdmin && (
           <Route path="/admincp" component={AdminCP} />
         )}

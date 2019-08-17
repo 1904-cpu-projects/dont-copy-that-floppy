@@ -19,6 +19,7 @@ import {
   cartReducer
 } from './reducers/cartReducer';
 import { getUsers, deleteUser, adminReducer } from './reducers/adminReducer'
+import { getOrders, orderReducer } from './reducers/orderReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -27,7 +28,8 @@ const reducer = combineReducers({
   user: userReducer,
   error: errorReducer,
   cart: cartReducer,
-  users: adminReducer
+  users: adminReducer,
+  orders: orderReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -48,5 +50,6 @@ export {
   deleteUser,
   removeProduct,
   deleteCart,
-  editProduct
+  editProduct,
+  getOrders,
 };
