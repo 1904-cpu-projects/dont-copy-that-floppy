@@ -22,43 +22,44 @@ class ProductsTableForm extends React.Component {
   }
   onClick(ev) {
     ev.preventDefault();
-    const { history, changeProduct, product } = this.props;
+    const { history, changeProduct, product, loadProducts } = this.props;
     changeProduct(product.id, this.state);
-    history.push('/admincp/products');
+    window.location.hash = '/admincp/products'
   }
   render() {
+    const {name, imageUrl, price, brand, description, quantity} = this.state
     const { product } = this.props;
     const { onChange, onClick } = this;
     return (
       <div>
         <h1>Edit Product - {product.name} </h1>
         <form>
-          <input name="name" defaultValue={product.name} onChange={onChange} />
+          <input name="name" defaultValue={name} onChange={onChange} />
           <input
             name="imageUrl"
-            defaultValue={product.imageUrl}
+            defaultValue={imageUrl}
             onChange={onChange}
           />
           <input
             name="price"
-            defaultValue={product.price}
+            defaultValue={price}
             onChange={onChange}
           />
           <input
             name="brand"
-            defaultValue={product.brand}
+            defaultValue={brand}
             onChange={onChange}
           />
           <textarea
             name="description"
             rows="4"
             cols="50"
-            defaultValue={product.description}
+            defaultValue={description}
             onChange={onChange}
           />
           <input
             name="quantity"
-            defaultValue={product.quantity}
+            defaultValue={quantity}
             onChange={onChange}
           />
           <button type="submit" onClick={onClick}>
@@ -79,7 +80,7 @@ const mapStateToProps = ({ products }, { match, history }) => {
 
 const mapDistpatchToProps = dispatch => {
   return {
-    changeProduct: (productId, product) => dispatch(editProduct(productId, product))
+    changeProduct: (productId, product) => dispatch(editProduct(productId, product)),
   };
 };
 
