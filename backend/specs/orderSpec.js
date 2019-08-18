@@ -33,6 +33,7 @@ describe('Order Specs', () => {
           quantity: 6
         }
       ]),
+        total: 660,
       })
       return app.get(`/api/users/${user.id}/orders`)
       .expect(200)
