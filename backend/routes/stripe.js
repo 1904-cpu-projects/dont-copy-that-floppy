@@ -32,6 +32,7 @@ router.post('/checkout', async (req, res, next) => {
       await Order.create({
         items: JSON.stringify(items),
         userId: user.id,
+        total: total,
       })
     }
     else{
