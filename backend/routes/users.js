@@ -101,6 +101,4 @@ router.get('/:id/orders', async (req, res, next) => {
   }
 })
 
-
-
 module.exports = router

@@ -41,6 +41,7 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/google', require('./routes/oauth'));
 app.use('/stripe', require('./routes/stripe'));
+app.use('/api/orders', require('./routes/orders'))
 
 app.get('/', (req, res, next) => {
   if (req.user) {
