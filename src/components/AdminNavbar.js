@@ -6,6 +6,7 @@ const AdminNavBar = () => {
     <div>
       <Link to='/admincp/users'>Users Table</Link>
       <Link to='/admincp/products'>Products Table</Link>
+      <Link to='/admincp/create'>Create A New Product</Link>
     </div>
   )
 }

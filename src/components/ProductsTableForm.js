@@ -20,6 +20,7 @@ class ProductsTableForm extends React.Component {
   onChange(ev) {
     this.setState({ [ev.target.name]: ev.target.value });
   }
+  
   onClick(ev) {
     ev.preventDefault();
     const { history, changeProduct, product, loadProducts } = this.props;
