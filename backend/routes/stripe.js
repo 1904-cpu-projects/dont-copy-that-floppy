@@ -13,6 +13,7 @@ router.post('/checkout', async (req, res, next) => {
 
   let error;
   let status;
+  let order;
 
   try{
     const {token, product, total} = req.body;
@@ -29,14 +30,16 @@ router.post('/checkout', async (req, res, next) => {
     })
 
     if(user){
-      await Order.create({
+      order = await Order.create({
         items: JSON.stringify(items),
         userId: user.id,
+        total: total,
       })
     }
     else{
-      await Order.create({
-        items: JSON.stringify(items)
+      order = await Order.create({
+        items: JSON.stringify(items),
+        total: total,
       })
     }
 
@@ -75,7 +78,7 @@ router.post('/checkout', async (req, res, next) => {
     status = "failure";
   }
 
-  res.json({ error, status })
+  res.json({ error, status, order})
 
 })
 

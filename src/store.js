@@ -19,7 +19,7 @@ import {
   cartReducer
 } from './reducers/cartReducer';
 import { getUsers, deleteUser, adminReducer } from './reducers/adminReducer'
-import { getOrders, orderReducer } from './reducers/orderReducer';
+import { getOrders, orderReducer, getOrder } from './reducers/orderReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -52,4 +52,5 @@ export {
   deleteCart,
   editProduct,
   getOrders,
+  getOrder,
 };

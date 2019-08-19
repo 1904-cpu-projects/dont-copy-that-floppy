@@ -10,6 +10,13 @@ const Order = db.define('orders', {
   items: {
     type: Sequelize.STRING
   },
+  total: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      min: 0.01
+    }
+  },
 })
 
 Order.prototype.totalPrice = () => {
