@@ -1,41 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCart } from '../store'
+import { deleteCart, getOrders, getOrder } from '../store'
 
 class OrderConfirmation extends React.Component {
-  constructor(props) {
-    super(props)
-    this.orderNumber = this.orderNumber.bind(this);
-  }
 
   componentDidMount () {
     this.props.deleteCart();
-  }
-
-  orderNumber() {
-    let now = Date.now().toString()
-    now += now + Math.floor(Math.random() * 10)
-    return  [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join('-')
+    if(this.props.loggedInUser.email){
+      this.props.loadOrders(this.props.loggedInUser);
+    }
+    else{
+      this.props.loadOrder(this.props.match.params.id);
+    }
   }
 
   render () {
+    const {orders} = this.props;
+
     return (
     <div>
       <h2>Thanks for shopping with us!</h2>
-      <h3>Order Number: {this.orderNumber()}</h3>
+      <h3>Order Number: {this.props.match.params.id}</h3>
     </div>
   )};
 }
 
 
-const mapStateToProps = ({ addedProduct }) => {
+const mapStateToProps = ({ orders, loggedInUser }) => {
   return {
-    addedProduct,
+    orders,
+    loggedInUser,
   };
 };
 
-const mapDispatchToProps = {
-  deleteCart
-}
+const mapDispatchToProps = dispatch => {
+  return {
+  deleteCart: () => dispatch(deleteCart()),
+  loadOrders: user => dispatch(getOrders(user)),
+  loadOrder: id => dispatch(getOrder(id)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderConfirmation);

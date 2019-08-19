@@ -38,7 +38,7 @@ class App extends React.Component {
         <Route path="/products/search/:name" />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/orderconfirmation" component={OrderConfirmation} />
+        <Route path="/orderconfirmation/:id" component={OrderConfirmation} />
         <Route path = "/orders" component={OrderHistory}/>
         {this.props.loggedInUser.isAdmin && (
           <Route path="/admincp" component={AdminCP} />

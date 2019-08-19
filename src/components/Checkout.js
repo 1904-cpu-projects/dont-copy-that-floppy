@@ -27,11 +27,11 @@ class Checkout extends React.Component {
     const response = await axios.post('/stripe/checkout', {
       token, product, total});
 
-    const { status } = response.data;
+    const { status, order } = response.data;
     if(status === 'success'){
       toast('Success! Check email for details',
       { type: 'success'})
-      window.location.hash = '/orderconfirmation';
+      window.location.hash = `/orderconfirmation/${order.id}`;
     }else{
       toast('Something went wrong', { type: 'error'});
     }
