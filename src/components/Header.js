@@ -31,6 +31,7 @@ class Header extends React.Component {
     const { searchItem } = this.state;
     const { handleSearch, reset } = this;
     const { products, user, loggedInUser, handleLogout, cart } = this.props;
+    const {pathname} = this.props.location;
 
     return (
       <header className="section-header">
@@ -89,12 +90,12 @@ class Header extends React.Component {
               </div>
               <div className="col-lg-5 col-xl-4 col-sm-12">
                 <div className="">
-                  <Link to="/">Home</Link>{' '}
-                  <Link to="/cart">Cart({cart.length})</Link>{' '}
-                  <Link to="/userprofile">
+                  <Link to="/" className={pathname === '/' ? 'badge badge-primary' : ''}>Home</Link>{' '}
+                  <Link to="/cart" className={pathname === '/cart' ? 'badge badge-primary' : ''}>Cart({cart.length})</Link>{' '}
+                  <Link to="/userprofile" className={pathname === '/userprofile' ? 'badge badge-primary' : ''}>
                     {loggedInUser.email ? 'My Profile' : ''}
                   </Link>{' '}
-                  <Link to="/login">
+                  <Link to="/login" className={pathname === '/login' ? 'badge badge-primary' : ''}>
                     {' '}
                     {loggedInUser.email ? (
                       <button onClick={() => handleLogout()}>
@@ -104,10 +105,10 @@ class Header extends React.Component {
                         `Login`
                       )}
                   </Link>{' '}
-                  <Link to="/signup">{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
-                  {loggedInUser.email && (<Link to="/orders">Order History</Link>)}
+                  <Link to="/signup" className={pathname === '/signup' ? 'badge badge-primary' : ''}>{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
+                  {loggedInUser.email && (<Link to="/orders" className={pathname === '/orders' ? 'badge badge-primary' : ''}>Order History</Link>)}
                   {loggedInUser.isAdmin && (
-                    <Link to="/admincp">Admin Control Panel</Link>
+                    <Link to="/admincp" className={pathname === '/admincp' ? 'badge badge-primary' : ''}>Admin Control Panel</Link>
                   )}
                 </div>
               </div>
