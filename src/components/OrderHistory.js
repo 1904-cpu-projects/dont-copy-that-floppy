@@ -14,19 +14,20 @@ class OrderHistory extends React.Component {
     if(orders.length !== 0){
       return(
         <div>
-          <table>
+          <table className="table table-striped">
             <tbody>
               <tr>
-                <th>Order Number</th>
-                <th>Items Ordered</th>
-                <th>Total</th>
+                <th scope="col">Order Number</th>
+                <th scope="col">Items Ordered</th>
+                <th scope="col">Total</th>
               </tr>
               {orders.map(order => {
                 return (
                   <tr key={order.id}>
-                    <td>{order.id}</td>
-                    {((JSON.parse(order.items))).map(item =>
-                        (<td key={item.name}>{item.name}</td>))}
+                    <th scope="row">{order.id}</th>
+                    <td>{((JSON.parse(order.items))).map(item =>
+                        (<div key={item.name}>{item.name}</div>))}
+                    </td>
                     <td>${order.total}.00</td>
                   </tr>
                 )

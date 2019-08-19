@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify'
@@ -29,8 +28,6 @@ class Checkout extends React.Component {
 
     const { status, order } = response.data;
     if(status === 'success'){
-      toast('Success! Check email for details',
-      { type: 'success'})
       window.location.hash = `/orderconfirmation/${order.id}`;
     }else{
       toast('Something went wrong', { type: 'error'});
