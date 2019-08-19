@@ -24,7 +24,11 @@ class SignUp extends React.Component{
     const {onChange} = this;
     const {error} = this.props;
     return(
-      <div>
+      <div style={{
+        display: 'flex',
+        alignItems: 'top',
+        justifyContent: 'top',
+        flexDirection: 'column'}}>
         <form onSubmit={this.props.handleCreate}>
           <div>
             <label>First Name</label>
