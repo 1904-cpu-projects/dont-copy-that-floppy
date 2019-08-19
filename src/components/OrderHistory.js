@@ -11,7 +11,7 @@ class OrderHistory extends React.Component {
   }
   render(){
     const {orders} = this.props;
-    if(orders.length !== 0){
+    if(orders.length > 0){
       return(
         <div>
           <table className="table table-striped">
