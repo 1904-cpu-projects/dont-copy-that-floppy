@@ -4,7 +4,8 @@ import {
   productsReducer,
   removeProduct,
   setProducts,
-  editProduct
+  editProduct,
+  newProduct
 } from './reducers/productsReducer';
 import { setCategories, categoriesReducer } from './reducers/categoriesReducer';
 import { loginUser, logoutUser, loginReducer } from './reducers/loginReducer';
@@ -53,4 +54,5 @@ export {
   editProduct,
   getOrders,
   getOrder,
+  newProduct
 };
