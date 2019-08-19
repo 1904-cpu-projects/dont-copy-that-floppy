@@ -122,13 +122,13 @@ router.use( async (req, res, next) => {
     if(user.isAdmin) {
       next()
     } else {
-      res.send(401).send('Dont Have the Require Permissions')
+      res.status(401).send('Dont Have the Require Permissions')
     }
   } catch (ex) {
     next(ex)
   }
   } else {
-    res.send(401).send('Please Sign In to Access this Page')
+    res.status(401).send('Please Sign In to Access this Page')
   }
 })
 
