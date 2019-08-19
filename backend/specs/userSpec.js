@@ -17,9 +17,9 @@ describe('User Specs', () => {
     it('GET All USERS', () => {
       return app
         .get('/api/users')
-        .expect(200)
+        .expect(401)
         .then(res => {
-          expect(res.body.length).to.greaterThan(0);
+          expect(res.error.text).to.equal('Please Sign In to Access this Page');
         });
     });
   });
