@@ -54,7 +54,7 @@ const mapStateToProps = ({ products }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteProduct: productId => dispatch(removeProduct(productId))
+    deleteProduct: productId => dispatch(removeProduct(productId)),
   };
 };
 
