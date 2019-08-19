@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteCart, getOrders, getOrder } from '../store'
 
+
 class OrderConfirmation extends React.Component {
 
   componentDidMount () {

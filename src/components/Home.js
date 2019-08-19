@@ -12,7 +12,7 @@ const Home = ({ loggedInUser }) => {
         Welcome,{' '}
         {loggedInUser.email
           ? `${loggedInUser.firstName} ${loggedInUser.lastName}`
-          : ''}!
+          : 'Guest'}!
       </h2>
     </div>
   );
