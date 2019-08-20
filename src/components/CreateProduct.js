@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { newProduct } from '../store';
 
 class CreateProduct extends React.Component {
@@ -22,59 +22,64 @@ class CreateProduct extends React.Component {
   }
 
   onSubmit(ev) {
-    ev.preventDefault()
-    const { addProduct } = this.props
-    addProduct(this.state)
+    ev.preventDefault();
+    const { addProduct } = this.props;
+    addProduct(this.state);
   }
 
   render() {
-  const {name, imageUrl, price, brand, description, quantity} = this.state
+    const { name, imageUrl, price, brand, description, quantity } = this.state;
     const { onChange, onSubmit } = this;
     return (
       <div>
         <h1>Create A New Product</h1>
         <form>
-          <input name="name" value={name} onChange={onChange} />
-          <input
-            name="imageUrl"
-            value={imageUrl}
-            onChange={onChange}
-          />
-          <input
-            name="price"
-            value={price}
-            onChange={onChange}
-          />
-          <input
-            name="brand"
-            value={brand}
-            onChange={onChange}
-          />
-          <textarea
-            name="description"
-            rows="4"
-            cols="50"
-            value={description}
-            onChange={onChange}
-          />
-          <input
-            name="quantity"
-            value={quantity}
-            onChange={onChange}
-          />
+          <label>
+            Name:
+            <input name="name" value={name} onChange={onChange} />
+          </label>
+          <label>
+            ImageUrl:
+            <input name="imageUrl" value={imageUrl} onChange={onChange} />
+          </label>
+          <label>
+            Price:
+            <input name="price" value={price} onChange={onChange} />
+          </label>
+          <label>
+            Brand:
+            <input name="brand" value={brand} onChange={onChange} />
+          </label>
+          <label>
+            Description:
+            <textarea
+              name="description"
+              rows="4"
+              cols="50"
+              value={description}
+              onChange={onChange}
+            />
+          </label>
+          <label>
+            Quantity:
+            <input name="quantity" value={quantity} onChange={onChange} />
+          </label>
           <button type="submit" onClick={onSubmit}>
             Add a New Product
           </button>
         </form>
       </div>
-    )
-}
+    );
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addProduct: product => dispatch(newProduct(product))
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(CreateProduct)
+export default connect(
+  null,
+  mapDispatchToProps
+)(CreateProduct);
