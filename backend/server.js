@@ -87,7 +87,7 @@ app.post('/login', async (req, res, next) => {
           res.status(203).send('Unauthorized: Wrong Password');
         }
       } else {
-        res.status(203).send('Unautorized: Please create an Account');
+        res.status(203).send('Unauthorized: Please create an Account');
       }
     } else {
       res.status(203).send('Unauthorized: Enter your Credentials');
