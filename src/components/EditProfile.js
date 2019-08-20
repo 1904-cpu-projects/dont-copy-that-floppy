@@ -1,30 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 class EditProfile extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      firstName: props.loggedInUser.firstName,
+      lastName: props.loggedInUser.lastName,
+      email: props.loggedInUser.email
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    await axios.put(`/api/users/${this.props.loggedInUser.id}`, this.state);
+    this.props.loggedInUser.firstName = this.state.firstName;
+    this.props.loggedInUser.lastName = this.state.lastName;
+    this.props.loggedInUser.email = this.state.email;
+    window.location.hash = '/userprofile'
   }
 
   render () {
-    const user = this.props.loggedInUser
+    const { handleChange, handleSubmit } = this;
+    const { firstName, lastName, email } = this.state;
     return (
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>
             First Name
-            <input type='text' defaultValue={user.firstName} />
+            <input type='text' name='firstName' onChange={event => handleChange(event)} value={firstName}/>
           </label>
           <br />
           <label>
             Last Name
-            <input type='text' defaultValue={user.lastName} />
+            <input type='text' name='lastName' onChange={event => handleChange(event)} value={lastName}/>
           </label>
           <br />
           <label>
             Email
-            <input type='text' defaultValue={user.email} />
+            <input type='text' name='email' onChange={event => handleChange(event)} value={email}/>
           </label>
           <br />
           <button type='submit'>Submit</button><Link to='/userprofile'><button>Cancel</button></Link>

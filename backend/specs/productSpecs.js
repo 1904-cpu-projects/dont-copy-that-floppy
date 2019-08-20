@@ -10,9 +10,9 @@ describe('Post Route - PRODUCTS', () => {
       description: 'Blakes Test Sec',
       quantity: 6
     })
-    .expect(201)
+    .expect(401)
     .then(response => {
-      expect(response.body.name).to.equal('Old Apple Product')
+      expect(response.error.text).to.equal('Please Sign In to Access this Page')
     })
   });
 });

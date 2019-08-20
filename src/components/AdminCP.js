@@ -3,6 +3,8 @@ import AdminNavBar from './AdminNavbar';
 import { Route } from 'react-router-dom'
 import UsersTable from './UsersTable';
 import ProductsTable from './ProductsTable'
+import ProductsTableForm from './ProductsTableForm';
+import CreateProduct from './CreateProduct'
 
 const AdminCP = () => {
   return (
@@ -11,7 +13,9 @@ const AdminCP = () => {
       <AdminNavBar />
       <div>
         <Route path='/admincp/users' component={UsersTable} />
-        <Route path='/admincp/products' component={ProductsTable} />
+        <Route exact path='/admincp/products' component={ProductsTable} />
+        <Route exact path='/admincp/products/:id' component={ProductsTableForm}/>
+        <Route exact path='/admincp/create' component={CreateProduct} />
       </div>
     </div>
   );

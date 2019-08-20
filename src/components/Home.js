@@ -1,19 +1,26 @@
 import React from 'react';
-import Carousel from './Carousel';
 import { connect } from 'react-redux';
 
 const Home = ({ loggedInUser }) => {
   return (
-    <div>
-      <div>Welcome! {loggedInUser.email ? `${loggedInUser.firstName} ${loggedInUser.lastName}` : ''}</div>
-      <Carousel />
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column'}}>
+      <h2>
+        Welcome,{' '}
+        {loggedInUser.email
+          ? `${loggedInUser.firstName} ${loggedInUser.lastName}`
+          : 'Guest'}!
+      </h2>
     </div>
   );
 };
 
 const mapStateToProps = ({ loggedInUser }) => {
   return {
-    loggedInUser,
+    loggedInUser
   };
 };
 

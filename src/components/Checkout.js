@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify'
@@ -27,11 +26,9 @@ class Checkout extends React.Component {
     const response = await axios.post('/stripe/checkout', {
       token, product, total});
 
-    const { status } = response.data;
+    const { status, order } = response.data;
     if(status === 'success'){
-      toast('Success! Check email for details',
-      { type: 'success'})
-      window.location.hash = '/orderconfirmation';
+      window.location.hash = `/orderconfirmation/${order.id}`;
     }else{
       toast('Something went wrong', { type: 'error'});
     }
@@ -39,7 +36,6 @@ class Checkout extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const {total, product} = this.state
     const {handleToken} = this;
 
@@ -53,11 +49,11 @@ class Checkout extends React.Component {
     else{
       return (
         <div>
-        <table>
+        <table className="table table-striped">
           <tbody>
             <tr>
-              <th>Item</th>
-              <th>Price</th>
+              <th scope="col">Item</th>
+              <th scope="col">Price</th>
             </tr>
             {product.map(product =>
               <tr key={product.id}>
@@ -67,9 +63,9 @@ class Checkout extends React.Component {
             )}
           </tbody>
         </table>
-        <br />
-        <h5>Total: ${total}</h5>
-        <br />
+        <div className="alert alert-primary" role="alert">
+        Total: ${total.toFixed(2)}
+        </div>
         <div>
             <StripeCheckout
               token={handleToken}

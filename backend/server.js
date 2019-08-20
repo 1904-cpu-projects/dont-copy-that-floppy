@@ -41,6 +41,7 @@ app.use('/api/categories', require('./routes/categories'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/google', require('./routes/oauth'));
 app.use('/stripe', require('./routes/stripe'));
+app.use('/api/orders', require('./routes/orders'))
 
 app.get('/', (req, res, next) => {
   if (req.user) {
@@ -50,7 +51,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/login', async (req, res, next) => {
-  try {
+  try{
     if (req.session.email) {
       const user = await User.findOne({
         where: {
@@ -59,7 +60,11 @@ app.get('/login', async (req, res, next) => {
       })
       res.send(user);
     }
-  } catch (ex) {
+    else{
+      res.redirect('/');
+    }
+  }
+  catch(ex){
     next(ex);
   }
 });
@@ -82,7 +87,7 @@ app.post('/login', async (req, res, next) => {
           res.status(203).send('Unauthorized: Wrong Password');
         }
       } else {
-        res.status(203).send('Unautorized: Please create an Account');
+        res.status(203).send('Unauthorized: Please create an Account');
       }
     } else {
       res.status(203).send('Unauthorized: Enter your Credentials');

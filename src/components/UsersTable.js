@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteUser } from '../store';
+import axios from 'axios';
 
 const UsersTable = ({ users, removeUser }) => {
   return (
@@ -11,6 +12,7 @@ const UsersTable = ({ users, removeUser }) => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Admin</th>
             <th>Delete User</th>
           </tr>
           {users.map(user => {
@@ -19,6 +21,19 @@ const UsersTable = ({ users, removeUser }) => {
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>
+                <td>
+                  <select
+                    defaultValue={user.isAdmin}
+                    onChange={async ev => {
+                      await axios.put(`/api/users/${user.id}`, {
+                        isAdmin: ev.target.value
+                      });
+                    }}
+                  >
+                    <option value={true}>True</option>
+                    <option value={false}>False</option>
+                  </select>
+                </td>
                 <td>
                   <button type="submit" onClick={() => removeUser(user.id)}>
                     Delete User

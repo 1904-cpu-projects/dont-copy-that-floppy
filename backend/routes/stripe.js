@@ -13,9 +13,35 @@ router.post('/checkout', async (req, res, next) => {
 
   let error;
   let status;
+  let order;
 
   try{
     const {token, product, total} = req.body;
+
+    const items = product.map(item => ({
+      name: item.name,
+      price: item.price,
+      quantity: 1}));
+
+    const user = await User.findOne({
+      where: {
+        email: token.email
+      }
+    })
+
+    if(user){
+      order = await Order.create({
+        items: JSON.stringify(items),
+        userId: user.id,
+        total: total,
+      })
+    }
+    else{
+      order = await Order.create({
+        items: JSON.stringify(items),
+        total: total,
+      })
+    }
 
     const customer = await stripe.customers.create({
       email: token.email,
@@ -52,7 +78,7 @@ router.post('/checkout', async (req, res, next) => {
     status = "failure";
   }
 
-  res.json({ error, status })
+  res.json({ error, status, order})
 
 })
 

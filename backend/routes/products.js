@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { models } = require('../index');
-const { Product } = models;
+const { Product, User } = models;
 
 router.get('/', async (req, res, next) => {
   try {
@@ -31,6 +31,28 @@ router.get('/category/:id', async (req, res, next) => {
     next(ex);
   }
 });
+
+router.use( async (req, res, next) => {
+  if(req.session.email) {
+    try {
+    const user = await User.findOne({
+      where: {
+        email: req.session.email
+      }
+    }
+    )
+    if(user.isAdmin) {
+      next()
+    } else {
+      res.status(401).send('Dont Have the Require Permissions')
+    }
+  } catch (ex) {
+    next(ex)
+  }
+  } else {
+    res.status(401).send('Please Sign In to Access this Page')
+  }
+})
 
 router.post('/', async (req, res, next) => {
   try {
