@@ -11,7 +11,7 @@ class OrderHistory extends React.Component {
   }
   render(){
     const {orders} = this.props;
-    if(orders.length !== 0){
+    if(orders.length > 0){
       return(
         <div>
           <table className="table table-striped">
@@ -28,7 +28,7 @@ class OrderHistory extends React.Component {
                     <td>{((JSON.parse(order.items))).map(item =>
                         (<div key={item.name}>{item.name}</div>))}
                     </td>
-                    <td>${order.total}.00</td>
+                    <td>${order.total.toFixed(2)}</td>
                   </tr>
                 )
               })}

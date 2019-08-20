@@ -5,6 +5,13 @@ import Carousel from './Carousel';
 import Products from './Products';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import SignUp from './SignUp';
+import Login from './Login';
+import OrderConfirmation from './OrderConfirmation';
+import OrderHistory from './OrderHistory';
+import UserProfile from './UserProfile';
+import EditProfile from './EditProfile';
+
 
 const Sidebar = props => {
   const { categories } = props;
@@ -39,6 +46,13 @@ const Sidebar = props => {
           <Route path="/checkout" component={Checkout} />
           <Route path="/products/category/:id" component={Products} />
           <Route path="/products" exact component={Products} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
+          <Route path="/products/search/:name" />
+          <Route path="/orderconfirmation/:id" component={OrderConfirmation} />
+          <Route path = "/orders" component={OrderHistory}/>
+          <Route path="/userprofile" component={UserProfile} />
+          <Route path="/editprofile" component={EditProfile} />
         </HashRouter>
       </div>
     </section>
