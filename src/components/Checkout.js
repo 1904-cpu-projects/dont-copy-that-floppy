@@ -49,7 +49,7 @@ class Checkout extends React.Component {
     else{
       return (
         <div>
-        <table table className="table table-striped">
+        <table className="table table-striped">
           <tbody>
             <tr>
               <th scope="col">Item</th>
@@ -63,7 +63,7 @@ class Checkout extends React.Component {
             )}
           </tbody>
         </table>
-        <div class="alert alert-primary" role="alert">
+        <div className="alert alert-primary" role="alert">
         Total: ${total.toFixed(2)}
         </div>
         <div>
