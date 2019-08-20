@@ -49,11 +49,11 @@ class Checkout extends React.Component {
     else{
       return (
         <div>
-        <table>
+        <table table className="table table-striped">
           <tbody>
             <tr>
-              <th>Item</th>
-              <th>Price</th>
+              <th scope="col">Item</th>
+              <th scope="col">Price</th>
             </tr>
             {product.map(product =>
               <tr key={product.id}>
@@ -63,9 +63,9 @@ class Checkout extends React.Component {
             )}
           </tbody>
         </table>
-        <br />
-        <h5>Total: ${total}</h5>
-        <br />
+        <div class="alert alert-primary" role="alert">
+        Total: ${total.toFixed(2)}
+        </div>
         <div>
             <StripeCheckout
               token={handleToken}
