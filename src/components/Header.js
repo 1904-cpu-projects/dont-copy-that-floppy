@@ -65,18 +65,19 @@ class Header extends React.Component {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-3 col-sm-4">
-                <div className="brand-wrap">
+                <div className="brand-wrap" style={{display: 'flex', margin: 10, justifyContent: 'center', alignContent: 'center', alignItems: 'center', justifyItems: 'center'}}>
                   <img
                     className="logo"
-                    style={{ width: 100, height: 100 }}
+                    style={{ width: 125, height: 125, margin: 10, padding: 10 }}
                     src="https://i.imgur.com/BOdXYeP.png"
                   />
-                  <h2 className="logo-text">Floppy Shoppy</h2>
+                  <br />
+                  <h2 className="logo-text" style={{padding: 10}}>Floppy Shoppy</h2>
                 </div>
               </div>
               <div className="col-lg-4 col-xl-5 col-sm-8">
                 <form onSubmit={handleSearch} className="search-wrap">
-                  <div className="input-group w-100">
+                  <div className="input-group w-100" style={{padding: 10}}>
                     <input type="text" name="searchItem" className="form-control" style={{ width: 55 }} placeholder="Search" />
                     <div className="input-group-append">
                       <button className="btn btn-primary">
@@ -95,21 +96,22 @@ class Header extends React.Component {
                   <Link to="/userprofile" className={pathname === '/userprofile' ? 'badge badge-primary' : ''}>
                     {loggedInUser.email ? 'My Profile' : ''}
                   </Link>{' '}
+                  <Link to="/signup" className={pathname === '/signup' ? 'badge badge-primary' : ''}>{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
+                  {loggedInUser.email && (<Link to="/orders" className={pathname === '/orders' ? 'badge badge-primary' : ''}>Order History</Link>)}
+                  {' '}
+                  {loggedInUser.isAdmin && (
+                    <Link to="/admincp" className={pathname === '/admincp' ? 'badge badge-primary' : ''}>Admin Control Panel</Link>
+                  )}
                   <Link to="/login" className={pathname === '/login' ? 'badge badge-primary' : ''}>
                     {' '}
                     {loggedInUser.email ? (
-                      <button onClick={() => handleLogout()}>
+                      <button className="btn btn-primary" onClick={() => handleLogout()}>
                         Logout {loggedInUser.email}
                       </button>
                     ) : (
                         `Login`
                       )}
-                  </Link>{' '}
-                  <Link to="/signup" className={pathname === '/signup' ? 'badge badge-primary' : ''}>{!loggedInUser.email ? 'Sign Up' : ''}</Link>{' '}
-                  {loggedInUser.email && (<Link to="/orders" className={pathname === '/orders' ? 'badge badge-primary' : ''}>Order History</Link>)}
-                  {loggedInUser.isAdmin && (
-                    <Link to="/admincp" className={pathname === '/admincp' ? 'badge badge-primary' : ''}>Admin Control Panel</Link>
-                  )}
+                  </Link>
                 </div>
               </div>
             </div>
