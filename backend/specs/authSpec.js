@@ -35,7 +35,7 @@ describe('Authentication Specs', () => {
         .send({ email: 'letMeIn@hackguy.com', password: 'password' })
         .expect(203)
         .then(res => {
-          expect(res.text).to.equal('Unautorized: Please create an Account')
+          expect(res.text).to.equal('Unauthorized: Please create an Account')
         })
     })
     it('Rejects login if a form field empty', () =>{
